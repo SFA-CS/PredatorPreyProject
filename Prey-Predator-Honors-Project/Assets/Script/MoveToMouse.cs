@@ -9,7 +9,7 @@ using UnityEngine;
 public class MoveToMouse : MonoBehaviour
 {
     public static List<MoveToMouse> moveableObjects = new List<MoveToMouse>();
-    public float speed = 5;
+    public float speed = 50;
     private Vector3 target;
     private bool selected;
 
@@ -23,15 +23,38 @@ public class MoveToMouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && selected) 
+         
+        if (Input.GetMouseButtonDown(0) && selected)
         {
-        
-            target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            target.z = transform.position.z;
-        }
 
+                //look to target
+                Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+                Vector3 dir = Input.mousePosition - pos;
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+                float dist = dir.magnitude;
+
+                //move to target if its in range
+                if (dist <= 30) // setting the range
+                {
+                     target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                     target.z = transform.position.z;    
+                }
+
+        }
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
     }
+    
+    //if (Input.GetMouseButtonDown(0) && selected)
+    //{
+
+    //    target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //    target.z = transform.position.z;
+    //}
+
+    // transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+    // }
+
 
     private void OnMouseDown()
     {
