@@ -372,7 +372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1041014277}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Prey
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -404,7 +404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1233699595}
   m_Layer: 0
-  m_Name: Player (1)
+  m_Name: Predator
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
