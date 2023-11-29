@@ -44,3 +44,6 @@ TagManager:
   - name: Player
     uniqueID: 3208152345
     locked: 0
+  - name: Environment
+    uniqueID: 2364290685
+    locked: 0
