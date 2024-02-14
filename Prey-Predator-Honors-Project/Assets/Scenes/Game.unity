@@ -1348,7 +1348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba8396d989eb1c41a923eee00feec0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 599028930}
+  predator: {fileID: 1613155105}
+  prey: {fileID: 599028930}
   offset: {x: 0, y: 0, z: 0}
 --- !u!4 &1732314779
 Transform:

@@ -7,9 +7,16 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform player;
+    public Transform predator;
+    public Transform prey;
+    private Transform player;
     public Vector3 offset;
     int counter = 0;
+
+    void Start()
+    {
+        this.player = this.prey;
+    }
 
     // Update is called once per frame
     void Update()
@@ -18,16 +25,17 @@ public class CameraFollow : MonoBehaviour
         
     }
 
-    public void onMouseDown()
+    private void OnMouseDown()
     {
+        Debug.Log("Mouse Down " + counter);
         counter++;
         if(counter == 5)
         {
-            player = transform.Find("Predator Sprite");
+            player = this.predator;
         }
         if(counter == 10)
         {
-            player = transform.Find("Prey Sprite");
+            player = this.prey;
             counter = 0;
         }
     }
