@@ -58,7 +58,7 @@ public class MoveToMouse : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("Color Blue: ");
+        //Sets the color of the player to blue if selected and white if not
         selected = true;
         gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
 
