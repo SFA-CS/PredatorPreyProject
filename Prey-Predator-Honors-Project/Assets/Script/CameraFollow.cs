@@ -29,14 +29,19 @@ public class CameraFollow : MonoBehaviour
             if (counter == 5)
             {
                 player = this.predator; //changes camera to the predator
+                
             }
             if (counter == 10)
             {
                 player = this.prey; //changes camera to the prey
                 counter = 0;
             }
+
+            
             //Moves the camera when the player moves
             transform.position = new Vector3(player.position.x + offset.x, player.position.y + offset.y, offset.z); // Camera follows the player with specified offset position
+            
+            
         }
     }
 
