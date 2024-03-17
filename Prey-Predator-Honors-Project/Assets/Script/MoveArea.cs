@@ -1,17 +1,14 @@
-﻿// The intended use of this class is to create a 3D surface from a parametization using
-// the parameters s and t.
-// 
+﻿// The intended use of this class is to create the legal move area based on distance traveled and turning radius.
+// Authors: JJB
 
 using UnityEngine;
-//using UnityEditor;
 
-[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-//[ExecuteInEditMode] // this should show the object in the scence view
-// https://docs.unity3d.com/ScriptReference/ExecuteInEditMode.html
-public class SurfaceMesh : MonoBehaviour  {
+
+[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
+public class MoveArea : MonoBehaviour  {
 
 	
-	// the number of segments to produce the grid for the s and t parameters
+	// the number of segments to produce the grid for the a and t parameters
 	private int aSegments, tSegments;
 
 	[SerializeField]
@@ -29,42 +26,35 @@ public class SurfaceMesh : MonoBehaviour  {
     private float deltaA = 0.1f; // step size for a parameter
 
 	
-    protected float deltaT = 0.1f; // step size in "t" direction.
+    private float deltaT = 0.1f; // step size in "t" direction.
 
     
-   // vector holding the vertices for the mesh
-	protected Vector3[] vertices;
+	// vector holding the vertices for the mesh
+	private Vector3[] vertices;
     public Vector3[] Vertices { get { return this.vertices; } }
 
 	// mesh for the mesh filter componenet and will hold the vertices
-	protected Mesh mesh;
+	private Mesh mesh;
+	private MeshCollider meshCollider; 
 
 
 	//----------------------Coordinate Functions------------------
-	private float xcoor(float a, float t) {
-        // the x coordinate of a point of the surface under the given parameterization
+	private float xcoor(float a, float t) {        
         // 1/a (1-cos(d*a*t), 
 		return 1 / a * (1 - Mathf.Cos(this.distance * a * t));
 	}
 
-	private float zcoor(float s, float t) {
-        // the z coordinate of a point of the surface under the given parameterization
+	private float zcoor(float a, float t) {        
         // 1/a*sin(d*a*t)
-        return 1/aSegments * Mathf.Sin(this.distance*aSegments*t);
+        return 1/a* Mathf.Sin(this.distance*a*t);
 	}
 
 
-	private float ycoor(float s, float t) {
-        // the y coordinate of a point of the surface under the given parameterization
+	private float ycoor(float a, float t) {        
         return 0;
 	}
 
-    
-    //----------------GetVertices--------------------
-    public Vector3[] GetVertices()
-    {
-        return this.vertices; 
-    }
+      
 
 
     //---------------------SetTriangles--------------------
@@ -95,8 +85,8 @@ public class SurfaceMesh : MonoBehaviour  {
 			}
 		}
 
-		// we are double the vertices
-		// essentially we have one copy for the clockwise triangles and another for
+		// We are doubling the vertices
+		// We have one copy for the clockwise triangles and another for
 		// the counter clockwise triangles. We do this so normals are calculated correctly
 		// and don't cancel each other out. Normals average triangles connected to them
 		Vector3[] doubleVertices = new Vector3[mesh.vertices.Length + mesh.vertices.Length];
@@ -116,39 +106,29 @@ public class SurfaceMesh : MonoBehaviour  {
 	}
 
 	//------------------SetSegments-----------------------------
-	// This method sets the number of x and y coordinates needed given
-	// the start and end of the interval and setp size. For instance, to go from
-	// 1.5 to 2.5 in increments of 0.1, we need 11 and 10 segments points for x.
+	// This method sets the number segments
+	// based on the step size. For instance, to go from
+	// 1.5 to 2.5 in increments of 0.1, we need 11 point and 10 segments.
 	private void SetSegments() {
 		aSegments = Mathf.CeilToInt ((2/this.radius) / this.deltaA); 
 		tSegments = Mathf.CeilToInt (1 / deltaT); 
 	}
 
-    //-----------------GetSegments------------------------
-    // Returns the number of segments in each direction ("parameter").
-    public int GetNumberOfaSegments()
-    {
-        return this.aSegments;
-    }
-    public int GetNumberOfTSegments()
-    {
-        return this.tSegments;
-    }
+    
 
     //-----------------------Generate-------------------------
     // this method generates the mesh for the graph
-    void Generate () {
+	private void Generate () {
 	    GetComponent<MeshFilter>().mesh = mesh = new Mesh();
-        //mesh.name = this.surfaceName;
-        //this.gameObject.name = this.surfaceName;
+		GetComponent<MeshCollider>().sharedMesh = mesh;
+		        
         mesh.name = this.gameObject.name;
 
-		// set the number (s,t) coordinates needed to make the mesh
+		// set the number (a,t) coordinates needed to make the mesh
 		SetSegments ();
 
-
-		// the (s,t) value for each point
-		float sval = 0;
+		// the (a,t) value for each point
+		float aval = 0;
 		float tval = 0;
 
 		// we need one more point than the number of segments
@@ -160,11 +140,10 @@ public class SurfaceMesh : MonoBehaviour  {
 
 		for (int i = 0, t = 0; t <= tSegments; t++) {
 			for (int a = 0; a <= aSegments; a++, i++) {
-				sval = -1/this.radius + a * this.deltaA;
+				aval = -1/this.radius + a * this.deltaA;
 				tval =  t * deltaT;
 				// set the coordinate of the vertex
-				this.vertices[i] = new Vector3(xcoor(sval, tval),  zcoor(sval,tval), ycoor(sval, tval));
-
+				this.vertices[i] = new Vector3(xcoor(aval, tval),  zcoor(aval,tval), ycoor(aval, tval));
 
 				// set the uv using the position relative to the total size
 				uv[i] = new Vector2( (float)a /(float) aSegments, (float)t/(float) tSegments);
@@ -175,7 +154,7 @@ public class SurfaceMesh : MonoBehaviour  {
 		mesh.vertices = this.vertices;
 
 		// set the triangles of the mesh
-		SetTriangles ();
+		this.SetTriangles ();
 
 		// set the base textures for the mesh
 		// this needs to be the same size as the
@@ -188,39 +167,16 @@ public class SurfaceMesh : MonoBehaviour  {
 
 	}
 
-
-    //-----------------------AddCollider---------------------------
-    private void SetBoxCollider()
-    {
-        // when we start add a box collider
-        // it will be automatically set the size of the bounding box of the mesh
-        if (gameObject.GetComponent<Collider>() == null)
-            gameObject.AddComponent<BoxCollider>();
-        else
-        {
-            // if it already has one, get the bounding box to make that of the mesh
-            BoxCollider c = gameObject.GetComponent<BoxCollider>();
-            c.enabled = true;
-            c.center = mesh.bounds.center;
-            c.size = mesh.bounds.extents;            
-        }
-    }
-
-    //-----------------------CreateSurface---------------
-    // This method creates the surface and box collider if desired.
-    public void CreateSurface()
-    {
-        this.Generate();
-        this.SetBoxCollider();
-    }
-
-    
-
-    // ------------------------ Awake ---------------------------------
-    // this is called when we enter play mode
-    protected void Awake()
+	public void CreateMoveArea(float turningRadius, float maxTravelDistance)
 	{
-        this.CreateSurface();
-    }
+		this.radius = turningRadius;
+		this.distance = maxTravelDistance;
+		this.Generate();
+	}
 
+    private void Start()
+    {
+		//TODO: remove Start, this is just for testing.
+		this.CreateMoveArea(1.5f, 2f);
+    }
 }
