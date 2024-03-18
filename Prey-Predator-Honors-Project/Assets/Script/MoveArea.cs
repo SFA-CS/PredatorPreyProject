@@ -1,10 +1,11 @@
 ﻿// The intended use of this class is to create the legal move area based on distance traveled and turning radius.
 // Authors: JJB
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 
-[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
+[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(PolygonCollider2D))]
 public class MoveArea : MonoBehaviour  {
 
 	
@@ -23,20 +24,15 @@ public class MoveArea : MonoBehaviour  {
 	public float TurningRadius { get { return radius; } }
 
 
-    private float deltaA = 0.1f; // step size for a parameter
+	private int numPoints = 10; // number of points to use for each parameter when creating the mesh
 
+    private float deltaA = 0.1f; // step size for a parameter
 	
     private float deltaT = 0.1f; // step size in "t" direction.
 
-    
-	// vector holding the vertices for the mesh
-	private Vector3[] vertices;
-    public Vector3[] Vertices { get { return this.vertices; } }
-
 	// mesh for the mesh filter componenet and will hold the vertices
 	private Mesh mesh;
-	private MeshCollider meshCollider; 
-
+	
 
 	//----------------------Coordinate Functions------------------
 	private float xcoor(float a, float t) {        
@@ -44,18 +40,15 @@ public class MoveArea : MonoBehaviour  {
 		return 1 / a * (1 - Mathf.Cos(this.distance * a * t));
 	}
 
-	private float zcoor(float a, float t) {        
+	private float ycoor(float a, float t) {        
         // 1/a*sin(d*a*t)
         return 1/a* Mathf.Sin(this.distance*a*t);
 	}
 
-
-	private float ycoor(float a, float t) {        
+	private float zcoor(float a, float t) {        
         return 0;
 	}
-
-      
-
+   
 
     //---------------------SetTriangles--------------------
     private void SetTriangles() {
@@ -120,8 +113,7 @@ public class MoveArea : MonoBehaviour  {
     // this method generates the mesh for the graph
 	private void Generate () {
 	    GetComponent<MeshFilter>().mesh = mesh = new Mesh();
-		GetComponent<MeshCollider>().sharedMesh = mesh;
-		        
+		
         mesh.name = this.gameObject.name;
 
 		// set the number (a,t) coordinates needed to make the mesh
@@ -133,7 +125,7 @@ public class MoveArea : MonoBehaviour  {
 
 		// we need one more point than the number of segments
 		// for example 10 segments requires 11 points
-		this.vertices = new Vector3[(aSegments + 1) * (tSegments + 1)];
+		Vector3[] vertices = new Vector3[(aSegments + 1) * (tSegments + 1)];
 
 		// we also create a uv map to get get better lighting effects on the surface
 		Vector2[] uv = new Vector2[vertices.Length];
@@ -143,7 +135,7 @@ public class MoveArea : MonoBehaviour  {
 				aval = -1/this.radius + a * this.deltaA;
 				tval =  t * deltaT;
 				// set the coordinate of the vertex
-				this.vertices[i] = new Vector3(xcoor(aval, tval),  zcoor(aval,tval), ycoor(aval, tval));
+				vertices[i] = new Vector3(xcoor(aval, tval),  ycoor(aval,tval), zcoor(aval, tval));
 
 				// set the uv using the position relative to the total size
 				uv[i] = new Vector2( (float)a /(float) aSegments, (float)t/(float) tSegments);
@@ -151,7 +143,7 @@ public class MoveArea : MonoBehaviour  {
 			}
 		}
 		// set the vectices for the mesh
-		mesh.vertices = this.vertices;
+		mesh.vertices = vertices;
 
 		// set the triangles of the mesh
 		this.SetTriangles ();
@@ -163,16 +155,61 @@ public class MoveArea : MonoBehaviour  {
 		Vector2[] doubleUV = new Vector2[uv.Length + uv.Length];
 		uv.CopyTo (doubleUV, 0);
 		uv.CopyTo (doubleUV, uv.Length);
-		mesh.uv =doubleUV;
+		mesh.uv =doubleUV;    
+		
+    }
 
-	}
 
-	public void CreateMoveArea(float turningRadius, float maxTravelDistance)
+	private void DefineCollider()
+	{
+		PolygonCollider2D collider = this.GetComponent<PolygonCollider2D>();
+
+		Vector2[] outline = new Vector2[(this.tSegments+1) * 2 + (this.aSegments+1)];
+
+		// left side boundary of shape bottom to top
+		float tval = 0;
+		float aval = -1 / radius; // constant on right side
+		
+		for (int i = 0; i <= this.tSegments; i++)
+		{
+			tval = i * deltaT;
+			outline[i] = new Vector2(this.xcoor(aval, tval), this.ycoor(aval, tval));
+			Debug.Log("i = " + i + " tval = " + tval + " aval = " + aval + " point " + outline[i]);
+		}
+
+
+		// top of shape, left to right
+		tval = 1;
+		for (int i = 0;  i<=  this.aSegments ;i++)
+		{
+            aval = -1 / this.radius + i * this.deltaA;
+            outline[i+this.tSegments+1] = new Vector2(this.xcoor(aval, tval), this.ycoor(aval, tval));
+            Debug.Log("i = " + (i + this.tSegments + 1) + " tval = " + tval + " aval = " + aval + " point " + outline[i + this.tSegments + 1]);
+        }
+
+
+        // right of shape, top to bottom        
+		aval = 1/ radius;
+        for (int i = 0; i <= this.tSegments; i++)
+        {
+            tval = 1 - i * deltaT; // top (t=1) to bottom (t = 0)
+            outline[this.aSegments+this.tSegments+2+i] = new Vector2(this.xcoor(aval, tval), this.ycoor(aval, tval));
+            Debug.Log("i = " + (this.aSegments + this.tSegments + 2 + i) + " tval = " + tval + " aval = " + aval + " point " + outline[this.aSegments + this.tSegments + 2 + i]);
+        }
+
+		collider.SetPath(0, outline);
+		collider.enabled = true;
+    }
+
+    public void CreateMoveArea(float turningRadius, float maxTravelDistance)
 	{
 		this.radius = turningRadius;
 		this.distance = maxTravelDistance;
 		this.Generate();
+		this.DefineCollider();
 	}
+
+
 
     private void Start()
     {
