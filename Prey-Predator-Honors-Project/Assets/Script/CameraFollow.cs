@@ -26,12 +26,12 @@ public class CameraFollow : MonoBehaviour
         {
             //counts up at every click, and if they click 5 times the camera switches to the other player
             counter++;
-            if (counter == 5)
+            if (counter == 1)
             {
                 player = this.predator; //changes camera to the predator
                 
             }
-            if (counter == 10)
+            if (counter == 2)
             {
                 player = this.prey; //changes camera to the prey
                 counter = 0;
