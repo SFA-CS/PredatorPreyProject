@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameOverScreen : MonoBehaviour
+public class PreyWins : MonoBehaviour
 {
     public void Setup()
     {
-        gameObject.SetActive(true); //Predator Win screen is set to active aka its now visable
+        gameObject.SetActive(true); //Prey Wins screen is set to active aka its now visable
     }
 
     public void RestartButton()
