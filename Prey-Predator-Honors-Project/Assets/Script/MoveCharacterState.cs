@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class MoveCharacterState : GameState 
 {
-    public GameObject avatar; // avatar to move
-    public MoveCharacterState(GameObject avatar) 
+    private  Avatar avatar; // avatar to move
+    private Vector2 location; // location to move to
+    public MoveCharacterState(Avatar avatar, Vector2 moveToPosition) 
     {
         this.avatar = avatar;
+        this.location = moveToPosition;
     }
 
     public override void Enter()
@@ -15,9 +17,13 @@ public class MoveCharacterState : GameState
         base.Enter();
     }
 
-    public override void Exit() { base.Exit();}
+    public override void Exit() { base.Exit();
+        // switch to other turn
+    }
 
-    public override void Update() { base.Update(); }
+    public override void Update() { base.Update();
+        // gradually move avatar to desired location
+    }
 
     public override void HandleInput(GameObject clickedObject, Vector2 location)
     {

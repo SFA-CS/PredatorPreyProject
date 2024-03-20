@@ -185,9 +185,4 @@ public class MoveArea : MonoBehaviour  {
 		this.DefineCollider();
 	}
 
-    private void Start()
-    {
-		//TODO: remove Start, this is just for testing.
-		this.CreateMoveArea(1.5f, 2f);
-    }
 }

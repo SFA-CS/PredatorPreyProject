@@ -5,28 +5,26 @@ using UnityEngine;
 public class PreyTurnState : GameState
 {
 
-    private List<GameObject> avatars;
+    private List<Avatar> avatars;
     public PreyTurnState()     {
     }
 
-    public void SetAvatars(List<GameObject> avatars)
-    {
-        this.avatars = avatars;
-    }
+    
     
     public override void Enter()
     {
-        foreach (GameObject avatar in avatars)
+        this.avatars = GameManager.Instance.Prey; 
+        foreach (Avatar avatar in avatars)
         {
-            // show the mesh
+            avatar.ShowLegalMoveArea();
         }
     }
 
     public override void Exit()
     {
-        foreach (GameObject avatar in avatars)
+        foreach (Avatar avatar in avatars)
         {
-            // remove the mesh
+            avatar.HideLegalMoveArea();
         }
         
     }
@@ -40,7 +38,16 @@ public class PreyTurnState : GameState
     public override void HandleInput(GameObject clickedObject, Vector2 location)
     {
         // if we clicked on mesh for prey
-        MoveCharacterState moveState = new MoveCharacterState(clickedObject);
-        GameManager.Instance.SetState(moveState);
+        foreach (Avatar avatar in avatars)
+        {
+            
+            if (avatar.MovementArea.gameObject == clickedObject)
+            {
+                MoveCharacterState moveState = new MoveCharacterState(avatar, location);
+                GameManager.Instance.SetState(moveState);
+            }
+        }
+
+        
     }
 }
