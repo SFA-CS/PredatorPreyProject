@@ -1,38 +1,28 @@
 ﻿// The intended use of this class is to create the legal move area based on distance traveled and turning radius.
 // Authors: JJB
 
-using Unity.VisualScripting;
 using UnityEngine;
 
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(PolygonCollider2D))]
 public class MoveArea : MonoBehaviour  {
-
 	
-	// the number of segments to produce the grid for the a and t parameters
-	private int aSegments, tSegments;
-
 	[SerializeField]
 	[Tooltip("The maximum travel distance")]
 	private float distance = 2.0f;
 	public float MaxTravelDistance { get { return distance; } }
-
 
 	[SerializeField]
 	[Tooltip("The turing radius.")]
 	private float radius = 1.4f;
 	public float TurningRadius { get { return radius; } }
 
-
+	[SerializeField]
+	[Tooltip("The number of points to use in the parameterization of the mesh.")]
 	private int numPoints = 10; // number of points to use for each parameter when creating the mesh
-
-    private float deltaA = 0.1f; // step size for a parameter
-	
-    private float deltaT = 0.1f; // step size in "t" direction.
 
 	// mesh for the mesh filter componenet and will hold the vertices
 	private Mesh mesh;
-	
 
 	//----------------------Coordinate Functions------------------
 	private float xcoor(float a, float t) {        
@@ -49,7 +39,6 @@ public class MoveArea : MonoBehaviour  {
         return 0;
 	}
    
-
     //---------------------SetTriangles--------------------
     private void SetTriangles() {
 		// We compute the triangles of the mesh.
@@ -57,6 +46,9 @@ public class MoveArea : MonoBehaviour  {
 		// This is so the mesh is visible from both "sides" of each triangle
 
 		int numVertices = mesh.vertices.Length; // number of vertices
+
+		int aSegments = this.numPoints - 1; // 11 points make 10 segments
+		int tSegments = this.numPoints - 1; 
 
 		int[] counterClockwise = new int[aSegments * tSegments * 6];
 		int[] clockwise = new int[aSegments * tSegments * 6];
@@ -98,17 +90,6 @@ public class MoveArea : MonoBehaviour  {
 		mesh.RecalculateNormals ();
 	}
 
-	//------------------SetSegments-----------------------------
-	// This method sets the number segments
-	// based on the step size. For instance, to go from
-	// 1.5 to 2.5 in increments of 0.1, we need 11 point and 10 segments.
-	private void SetSegments() {
-		aSegments = Mathf.CeilToInt ((2/this.radius) / this.deltaA); 
-		tSegments = Mathf.CeilToInt (1 / deltaT); 
-	}
-
-    
-
     //-----------------------Generate-------------------------
     // this method generates the mesh for the graph
 	private void Generate () {
@@ -117,7 +98,7 @@ public class MoveArea : MonoBehaviour  {
         mesh.name = this.gameObject.name;
 
 		// set the number (a,t) coordinates needed to make the mesh
-		SetSegments ();
+		//SetSegments ();
 
 		// the (a,t) value for each point
 		float aval = 0;
@@ -125,21 +106,21 @@ public class MoveArea : MonoBehaviour  {
 
 		// we need one more point than the number of segments
 		// for example 10 segments requires 11 points
-		Vector3[] vertices = new Vector3[(aSegments + 1) * (tSegments + 1)];
+		Vector3[] vertices = new Vector3[this.numPoints*this.numPoints];
 
 		// we also create a uv map to get get better lighting effects on the surface
 		Vector2[] uv = new Vector2[vertices.Length];
 
-		for (int i = 0, t = 0; t <= tSegments; t++) {
-			for (int a = 0; a <= aSegments; a++, i++) {
-				aval = -1/this.radius + a * this.deltaA;
-				tval =  t * deltaT;
+		float delta = 1.0f / (this.numPoints-1);
+		for (int i = 0, t = 0; t <  this.numPoints; t++) {
+			for (int a = 0; a < this.numPoints; a++, i++) {
+				aval = -1.0f/this.radius * (1-a*delta) + 1.0f/this.radius * a * delta;  // goes from -1/R to 1/R
+				tval =  t * delta; // goes from 0 to 1
 				// set the coordinate of the vertex
 				vertices[i] = new Vector3(xcoor(aval, tval),  ycoor(aval,tval), zcoor(aval, tval));
 
 				// set the uv using the position relative to the total size
-				uv[i] = new Vector2( (float)a /(float) aSegments, (float)t/(float) tSegments);
-
+				uv[i] = new Vector2((float)a / (float)(this.numPoints - 1), (float)t / (float)(this.numPoints - 1));
 			}
 		}
 		// set the vectices for the mesh
@@ -159,42 +140,37 @@ public class MoveArea : MonoBehaviour  {
 		
     }
 
-
 	private void DefineCollider()
 	{
 		PolygonCollider2D collider = this.GetComponent<PolygonCollider2D>();
 
-		Vector2[] outline = new Vector2[(this.tSegments+1) * 2 + (this.aSegments+1)];
+		// 3 sides, left, top, right
+		Vector2[] outline = new Vector2[3*this.numPoints];
 
 		// left side boundary of shape bottom to top
 		float tval = 0;
-		float aval = -1 / radius; // constant on right side
-		
-		for (int i = 0; i <= this.tSegments; i++)
+		float aval = -1.0f / radius; // constant on right side
+		float delta = 1.0f / (this.numPoints-1); 
+		for (int i = 0; i < this.numPoints; i++)
 		{
-			tval = i * deltaT;
+			tval = i * delta;  // goes 0 to 1
 			outline[i] = new Vector2(this.xcoor(aval, tval), this.ycoor(aval, tval));
-			Debug.Log("i = " + i + " tval = " + tval + " aval = " + aval + " point " + outline[i]);
 		}
-
 
 		// top of shape, left to right
 		tval = 1;
-		for (int i = 0;  i<=  this.aSegments ;i++)
+		for (int i = 0;  i< this.numPoints; i++)
 		{
-            aval = -1 / this.radius + i * this.deltaA;
-            outline[i+this.tSegments+1] = new Vector2(this.xcoor(aval, tval), this.ycoor(aval, tval));
-            Debug.Log("i = " + (i + this.tSegments + 1) + " tval = " + tval + " aval = " + aval + " point " + outline[i + this.tSegments + 1]);
+            aval = -1.0f / this.radius * (1- i * delta) + 1.0f/this.radius * (i*delta);
+            outline[i+this.numPoints] = new Vector2(this.xcoor(aval, tval), this.ycoor(aval, tval));
         }
 
-
         // right of shape, top to bottom        
-		aval = 1/ radius;
-        for (int i = 0; i <= this.tSegments; i++)
+		aval = 1.0f/ radius;
+        for (int i = 0; i < this.numPoints; i++)
         {
-            tval = 1 - i * deltaT; // top (t=1) to bottom (t = 0)
-            outline[this.aSegments+this.tSegments+2+i] = new Vector2(this.xcoor(aval, tval), this.ycoor(aval, tval));
-            Debug.Log("i = " + (this.aSegments + this.tSegments + 2 + i) + " tval = " + tval + " aval = " + aval + " point " + outline[this.aSegments + this.tSegments + 2 + i]);
+            tval = 1 - i * delta; // top (t=1) to bottom (t = 0)
+            outline[this.numPoints * 2+i] = new Vector2(this.xcoor(aval, tval), this.ycoor(aval, tval));
         }
 
 		collider.SetPath(0, outline);
@@ -208,8 +184,6 @@ public class MoveArea : MonoBehaviour  {
 		this.Generate();
 		this.DefineCollider();
 	}
-
-
 
     private void Start()
     {
