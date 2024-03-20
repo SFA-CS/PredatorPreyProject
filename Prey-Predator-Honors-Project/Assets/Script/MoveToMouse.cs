@@ -23,7 +23,7 @@ public class MoveToMouse : MonoBehaviour
         moveableObjects.Add(this);
         target = transform.position;
         player = this.prey; //sets the first player to be prey
-        player.gameObject.GetComponent<SpriteRenderer>().color = Color.blue; //sets the player to blue
+        player.gameObject.GetComponent<SpriteRenderer>().color = Color.blue; //sets the prey to blue
 
     }
 
@@ -34,21 +34,21 @@ public class MoveToMouse : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             counter++;
-            if (counter == 5)
+            if (counter == 1)
             {
-                player.gameObject.GetComponent<SpriteRenderer>().color = Color.white; //sets the player to white
+                player.gameObject.GetComponent<SpriteRenderer>().color = Color.white; //sets the prey to white
                 player = this.predator; //changes camera to the predator
-                player.gameObject.GetComponent<SpriteRenderer>().color = Color.blue; //sets the new player to blue
+                player.gameObject.GetComponent<SpriteRenderer>().color = Color.red; //sets the predator to red
             }
-            if (counter == 10)
+            if (counter == 2)
             {
-                player.gameObject.GetComponent<SpriteRenderer>().color = Color.white; //sets the player to white
+                player.gameObject.GetComponent<SpriteRenderer>().color = Color.white; //sets the predator to white
                 player = this.prey; //changes camera to the prey
-                player.gameObject.GetComponent<SpriteRenderer>().color = Color.blue; //sets the new player to blue
+                player.gameObject.GetComponent<SpriteRenderer>().color = Color.blue; //sets the prey to blue
                 counter = 0;
             }
 
-            if(player.gameObject.GetComponent<SpriteRenderer>().color == Color.blue)
+            if(player.gameObject.GetComponent<SpriteRenderer>().color == Color.blue || player.gameObject.GetComponent<SpriteRenderer>().color == Color.red)
             {
                 //look to target
                 Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
