@@ -667,8 +667,10 @@ MonoBehaviour:
   prey:
   - {fileID: 1041014278}
   - {fileID: 919818199}
+  - {fileID: 642034200}
   predators:
   - {fileID: 1233699596}
+  - {fileID: 1310716177}
 --- !u!114 &480645482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,7 +834,6 @@ GameObject:
   m_Component:
   - component: {fileID: 599028930}
   - component: {fileID: 599028929}
-  - component: {fileID: 599028932}
   - component: {fileID: 599028931}
   - component: {fileID: 599028933}
   - component: {fileID: 599028934}
@@ -904,7 +905,7 @@ Transform:
   m_GameObject: {fileID: 599028927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.39, y: 6.42, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -959,21 +960,6 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
---- !u!114 &599028932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599028927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91685d45224e61a408664d2324e05d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  predator: {fileID: 1613155105}
-  prey: {fileID: 599028930}
-  speed: 5
 --- !u!50 &599028933
 Rigidbody2D:
   serializedVersion: 4
@@ -1138,7 +1124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642034199}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -6.68, y: -2.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1146,7 +1132,7 @@ Transform:
   - {fileID: 2085579597}
   - {fileID: 1509774077}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &656478074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,7 +1453,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919818198}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -6.68, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1475,7 +1461,7 @@ Transform:
   - {fileID: 1028975788}
   - {fileID: 198790552}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &949185533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,7 +1622,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1028975788}
   - component: {fileID: 1028975793}
-  - component: {fileID: 1028975792}
   - component: {fileID: 1028975791}
   - component: {fileID: 1028975790}
   - component: {fileID: 1028975789}
@@ -1751,21 +1736,6 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
---- !u!114 &1028975792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1028975787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91685d45224e61a408664d2324e05d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  predator: {fileID: 1613155105}
-  prey: {fileID: 1028975788}
-  speed: 5
 --- !u!212 &1028975793
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1843,15 +1813,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1041014276}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.76, y: -3.91, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -6.68, y: 2.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 599028930}
   - {fileID: 656478075}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!114 &1041014278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2144,7 +2114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233699594}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 5.73, y: 2.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2152,7 +2122,7 @@ Transform:
   - {fileID: 949185537}
   - {fileID: 1613155105}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &1233699596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2574,7 +2544,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310716176}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 5.73, y: -1.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2582,7 +2552,7 @@ Transform:
   - {fileID: 1976140998}
   - {fileID: 1706125085}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1378866077
 GameObject:
   m_ObjectHideFlags: 0
@@ -3007,7 +2977,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1613155105}
   - component: {fileID: 1613155108}
-  - component: {fileID: 1613155107}
   - component: {fileID: 1613155106}
   - component: {fileID: 1613155109}
   - component: {fileID: 1613155110}
@@ -3082,21 +3051,6 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
---- !u!114 &1613155107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613155104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91685d45224e61a408664d2324e05d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  predator: {fileID: 1613155105}
-  prey: {fileID: 599028930}
-  speed: 5
 --- !u!212 &1613155108
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3199,7 +3153,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1706125085}
   - component: {fileID: 1706125090}
-  - component: {fileID: 1706125089}
   - component: {fileID: 1706125088}
   - component: {fileID: 1706125087}
   - component: {fileID: 1706125086}
@@ -3314,21 +3267,6 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
---- !u!114 &1706125089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1706125084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91685d45224e61a408664d2324e05d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  predator: {fileID: 1706125085}
-  prey: {fileID: 599028930}
-  speed: 5
 --- !u!212 &1706125090
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3809,7 +3747,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2085579597}
   - component: {fileID: 2085579602}
-  - component: {fileID: 2085579601}
   - component: {fileID: 2085579600}
   - component: {fileID: 2085579599}
   - component: {fileID: 2085579598}
@@ -3924,21 +3861,6 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
---- !u!114 &2085579601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085579596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91685d45224e61a408664d2324e05d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  predator: {fileID: 1613155105}
-  prey: {fileID: 2085579597}
-  speed: 5
 --- !u!212 &2085579602
 SpriteRenderer:
   m_ObjectHideFlags: 0

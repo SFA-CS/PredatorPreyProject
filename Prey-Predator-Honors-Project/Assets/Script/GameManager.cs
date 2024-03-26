@@ -22,15 +22,24 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         // singleton design pattern
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this);
         }
         else
         {
             Instance = this;
-        }
+        }     
+
         this.SetState(new PreyTurnState());
+    }
+
+    private void Start()
+    {
+        foreach (Avatar avatar in this.predators)
+        {
+            avatar.HideLegalMoveArea();
+        }
     }
 
     public void OnClick(InputAction.CallbackContext context)
@@ -44,7 +53,7 @@ public class GameManager : MonoBehaviour
             if (rayHit.collider != null)
             {
                 Debug.Log(rayHit.collider.gameObject.name);
-                this.gameState.HandleInput(rayHit.collider.gameObject, mousePosition);
+                this.gameState.HandleInput(rayHit.collider.gameObject, ray.origin);
             }
             Debug.Log("Mouse Position : " + mousePosition + " Ray Origin (Unity Coordinates) " + ray.origin);
             
@@ -63,8 +72,7 @@ public class GameManager : MonoBehaviour
 
         this.gameState = newState;
         
-        if (this.gameState != null)
-            this.gameState.Enter();
+        this.gameState.Enter();
     }
 
 }
