@@ -29,8 +29,11 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
-        }     
-
+        }
+        // TODO: get from options
+        Scoreboard.Instance.MaxTurns = 10;
+        Scoreboard.Instance.PreyRemaining = this.prey.Count;
+        Scoreboard.Instance.NumTurns = 0;
         this.SetState(new PreyTurnState());
     }
 
@@ -57,6 +60,15 @@ public class GameManager : MonoBehaviour
             }
             Debug.Log("Mouse Position : " + mousePosition + " Ray Origin (Unity Coordinates) " + ray.origin);
             
+        }
+    }
+
+    public void PanRight(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameObject camera = Camera.main.gameObject;
+            camera.transform.localPosition += Vector3.right * Time.deltaTime;
         }
     }
 

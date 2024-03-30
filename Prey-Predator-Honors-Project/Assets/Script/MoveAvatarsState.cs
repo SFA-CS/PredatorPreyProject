@@ -32,7 +32,7 @@ public class MoveAvatorsState : GameState
     }
 
     public override void Exit() { base.Exit();
-        // switch to other turn
+        Scoreboard.Instance.NumTurns = Scoreboard.Instance.NumTurns + 1;
     }
     public override void Update() {
         foreach (Avatar avatar in this.avatars)
