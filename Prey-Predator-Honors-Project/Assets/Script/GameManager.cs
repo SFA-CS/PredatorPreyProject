@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+    
     [SerializeField]
     [Tooltip("Predator for the game")]
     private List<Avatar> prey;
@@ -15,8 +16,8 @@ public class GameManager : MonoBehaviour
     private List<Avatar> predators;
     public List<Avatar> Predators { get { return predators; } }
 
-    private GameState gameState;
-
+    private GameState gameState; // holds state of game (State Design Pattern)
+    
     public static GameManager Instance { get; private set; }
 
     private void Awake()
@@ -30,10 +31,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-        // TODO: get from options
-        Scoreboard.Instance.MaxTurns = 10;
-        Scoreboard.Instance.PreyRemaining = this.prey.Count;
-        Scoreboard.Instance.NumTurns = 0;
+       
         this.SetState(new PreyTurnState());
     }
 
@@ -43,6 +41,11 @@ public class GameManager : MonoBehaviour
         {
             avatar.HideLegalMoveArea();
         }
+
+        // TODO: get from options
+        Scoreboard.Instance.MaxTurns = 10;
+        Scoreboard.Instance.PreyRemaining = this.prey.Count;
+        Scoreboard.Instance.NumTurns = 0;
     }
 
     public void OnClick(InputAction.CallbackContext context)
@@ -63,19 +66,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PanRight(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            GameObject camera = Camera.main.gameObject;
-            camera.transform.localPosition += Vector3.right * Time.deltaTime;
-        }
-    }
-
+   
     public void Update()
     {
         this.gameState.Update();
-    }
+       
+     }
 
     public void SetState(GameState newState)
     {
