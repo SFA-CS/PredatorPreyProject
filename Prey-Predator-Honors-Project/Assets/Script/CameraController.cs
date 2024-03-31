@@ -11,6 +11,26 @@ public class CameraController : MonoBehaviour
     private float movementSpeed = 1.0f;
     // records the input movement direction 
     private Vector2 movementDirection = Vector2.zero;
+    private bool zoomIn = false;
+    private bool zoomOut = false;
+
+    public void ZoomIn()
+    {
+        this.zoomIn = true;
+        Debug.Log("Zooming");
+    }
+
+    public void ZoomOut()
+    {
+        Debug.Log("Zooming");
+        this.zoomOut = true;
+    }
+
+    public void HaltZoom()
+    {
+        this.zoomOut = false;
+        this.zoomIn = false;
+    }
 
     public void MoveCamera(InputAction.CallbackContext context)
     {
