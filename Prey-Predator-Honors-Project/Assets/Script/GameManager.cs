@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     public void OnClick(InputAction.CallbackContext context)
     {
-        if (context.canceled)  // button released
+        if (context.performed)  
         {
             // ray cast to determine where the click happened
             Vector2 mousePosition = Mouse.current.position.ReadValue();
