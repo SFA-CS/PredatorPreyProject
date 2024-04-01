@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+    
     [SerializeField]
     [Tooltip("Predator for the game")]
     private List<Avatar> prey;
@@ -15,14 +16,14 @@ public class GameManager : MonoBehaviour
     private List<Avatar> predators;
     public List<Avatar> Predators { get { return predators; } }
 
-    private GameState gameState;
-
+    private GameState gameState; // holds state of game (State Design Pattern)
+    
     public static GameManager Instance { get; private set; }
 
     private void Awake()
     {
         // singleton design pattern
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this);
         }
@@ -30,7 +31,21 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+       
         this.SetState(new PreyTurnState());
+    }
+
+    private void Start()
+    {
+        foreach (Avatar avatar in this.predators)
+        {
+            avatar.HideLegalMoveArea();
+        }
+
+        // TODO: get from options
+        Scoreboard.Instance.MaxTurns = 10;
+        Scoreboard.Instance.PreyRemaining = this.prey.Count;
+        Scoreboard.Instance.NumTurns = 0;
     }
 
     public void OnClick(InputAction.CallbackContext context)
@@ -44,17 +59,19 @@ public class GameManager : MonoBehaviour
             if (rayHit.collider != null)
             {
                 Debug.Log(rayHit.collider.gameObject.name);
-                this.gameState.HandleInput(rayHit.collider.gameObject, mousePosition);
+                this.gameState.HandleInput(rayHit.collider.gameObject, ray.origin);
             }
             Debug.Log("Mouse Position : " + mousePosition + " Ray Origin (Unity Coordinates) " + ray.origin);
             
         }
     }
 
+   
     public void Update()
     {
         this.gameState.Update();
-    }
+       
+     }
 
     public void SetState(GameState newState)
     {
@@ -63,8 +80,7 @@ public class GameManager : MonoBehaviour
 
         this.gameState = newState;
         
-        if (this.gameState != null)
-            this.gameState.Enter();
+        this.gameState.Enter();
     }
 
 }

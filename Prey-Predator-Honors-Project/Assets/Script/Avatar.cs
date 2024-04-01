@@ -20,6 +20,10 @@ public class Avatar : MonoBehaviour
     private MoveArea moveArea;
     public MoveArea MovementArea { get { return moveArea; } }
 
+    private Vector2 destination;
+    public Vector2 Destination {  get { return destination; } set { destination = value; } }
+        
+
     public void Start()
     {
         this.moveArea.CreateMoveArea(this.radius, this.distance);
@@ -33,5 +37,10 @@ public class Avatar : MonoBehaviour
     public void ShowLegalMoveArea()
     {
         this.moveArea.gameObject.GetComponent<MeshRenderer>().enabled = true;
+    }
+
+    public bool DestinationSelected()
+    {
+        return !this.moveArea.gameObject.GetComponent<MeshRenderer>().enabled;
     }
 }
