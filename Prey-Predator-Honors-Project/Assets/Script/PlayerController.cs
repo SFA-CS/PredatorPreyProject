@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         
-        if (PlayerPrefs.GetFloat("PreyNum") == 2)
+        if (PlayerPrefs.GetInt("PreyNum") == 2)
         {
             Prey2.SetActive(true);
         }

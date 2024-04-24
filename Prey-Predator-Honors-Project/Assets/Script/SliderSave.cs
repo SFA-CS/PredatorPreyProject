@@ -21,12 +21,12 @@ public class SliderSave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerPrefs.SetFloat("PreyNum",  PreyNumSlider.value);
-        PlayerPrefs.SetFloat("PredNum", PredNumSlider.value);
-        PlayerPrefs.SetFloat("TurnNum", TurnNumSlider.value);
-        PlayerPrefs.SetFloat("PreyRad", PreyRadSlider.value);
-        PlayerPrefs.SetFloat("PredRad", PredRadSlider.value);
-        PlayerPrefs.SetFloat("PreyTravDist", PreyTravDistSlider.value);
-        PlayerPrefs.SetFloat("PredTravDist", PredTravDistSlider.value);
+        PlayerPrefs.SetInt("PreyNum", (int)PreyNumSlider.value);
+        PlayerPrefs.SetInt("PredNum", (int)PredNumSlider.value);
+        PlayerPrefs.SetInt("TurnNum", (int)TurnNumSlider.value);
+        PlayerPrefs.SetInt("PreyRad", (int)PreyRadSlider.value);
+        PlayerPrefs.SetInt("PredRad", (int)PredRadSlider.value);
+        PlayerPrefs.SetInt("PreyTravDist", (int)PreyTravDistSlider.value);
+        PlayerPrefs.SetInt("PredTravDist", (int)PredTravDistSlider.value);
     }
 }
