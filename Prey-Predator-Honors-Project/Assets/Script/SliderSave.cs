@@ -24,9 +24,9 @@ public class SliderSave : MonoBehaviour
         PlayerPrefs.SetInt("PreyNum", (int)PreyNumSlider.value);
         PlayerPrefs.SetInt("PredNum", (int)PredNumSlider.value);
         PlayerPrefs.SetInt("TurnNum", (int)TurnNumSlider.value);
-        PlayerPrefs.SetInt("PreyRad", (int)PreyRadSlider.value);
-        PlayerPrefs.SetInt("PredRad", (int)PredRadSlider.value);
-        PlayerPrefs.SetInt("PreyTravDist", (int)PreyTravDistSlider.value);
-        PlayerPrefs.SetInt("PredTravDist", (int)PredTravDistSlider.value);
+        PlayerPrefs.SetFloat("PreyRad", PreyRadSlider.value);
+        PlayerPrefs.SetFloat("PredRad", PredRadSlider.value);
+        PlayerPrefs.SetFloat("PreyTravDist", PreyTravDistSlider.value);
+        PlayerPrefs.SetFloat("PredTravDist", PredTravDistSlider.value);
     }
 }
