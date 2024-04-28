@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030041, y: 0.000012994}
+  m_AnchoredPosition: {x: -0.000030517578, y: 0.000012994}
   m_SizeDelta: {x: 1060.631, y: 975.947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &498706
@@ -407,6 +407,7 @@ GameObject:
   - component: {fileID: 102799389}
   - component: {fileID: 102799391}
   - component: {fileID: 102799390}
+  - component: {fileID: 102799392}
   m_Layer: 5
   m_Name: PreyRadTxt
   m_TagString: Untagged
@@ -431,8 +432,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50.968, y: 322}
-  m_SizeDelta: {x: 383.38, y: 59.078}
+  m_AnchoredPosition: {x: 34.298, y: 322}
+  m_SizeDelta: {x: 416.72, y: 59.078}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &102799390
 MonoBehaviour:
@@ -533,6 +534,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102799388}
   m_CullTransparentMesh: 1
+--- !u!114 &102799392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102799388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd9c256b50068747b8a0d5cf35d2ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: 'Prey Turn Radius: '
+  slider: {fileID: 1818436220}
+  sliderText: {fileID: 102799390}
 --- !u!1 &132140393
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,6 +914,7 @@ GameObject:
   - component: {fileID: 205190632}
   - component: {fileID: 205190634}
   - component: {fileID: 205190633}
+  - component: {fileID: 205190635}
   m_Layer: 5
   m_Name: PreyTravDistTxt
   m_TagString: Untagged
@@ -922,8 +939,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 22.91, y: 14.77}
-  m_SizeDelta: {x: 342.65, y: 70.461}
+  m_AnchoredPosition: {x: 31.997, y: 14.77}
+  m_SizeDelta: {x: 460.63, y: 70.461}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &205190633
 MonoBehaviour:
@@ -1022,6 +1039,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 205190631}
   m_CullTransparentMesh: 1
+--- !u!114 &205190635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205190631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd9c256b50068747b8a0d5cf35d2ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: 'Prey Travel Distance: '
+  slider: {fileID: 815831273}
+  sliderText: {fileID: 205190633}
 --- !u!1 &236718919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1514,6 +1546,7 @@ GameObject:
   - component: {fileID: 453509793}
   - component: {fileID: 453509795}
   - component: {fileID: 453509794}
+  - component: {fileID: 453509796}
   m_Layer: 5
   m_Name: PreyNumTxt
   m_TagString: Untagged
@@ -1640,6 +1673,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453509792}
   m_CullTransparentMesh: 1
+--- !u!114 &453509796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453509792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd9c256b50068747b8a0d5cf35d2ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: '# of Prey: '
+  slider: {fileID: 2056298595}
+  sliderText: {fileID: 453509794}
 --- !u!1 &499911515
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,6 +2309,7 @@ GameObject:
   - component: {fileID: 755112094}
   - component: {fileID: 755112096}
   - component: {fileID: 755112095}
+  - component: {fileID: 755112097}
   m_Layer: 5
   m_Name: PredNumTxt
   m_TagString: Untagged
@@ -2285,8 +2334,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.09, y: 176}
-  m_SizeDelta: {x: 245.819, y: 50}
+  m_AnchoredPosition: {x: 8.089994, y: 174.904}
+  m_SizeDelta: {x: 331.344, y: 52.193}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &755112095
 MonoBehaviour:
@@ -2387,6 +2436,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 755112093}
   m_CullTransparentMesh: 1
+--- !u!114 &755112097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755112093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd9c256b50068747b8a0d5cf35d2ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: '# of Predators: '
+  slider: {fileID: 1229571254}
+  sliderText: {fileID: 755112095}
 --- !u!1 &815831271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2423,7 +2487,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -22.91001, y: -55.770233}
+  m_AnchoredPosition: {x: -31.996817, y: -55.77023}
   m_SizeDelta: {x: 485.316, y: 104.766}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &815831273
@@ -3448,10 +3512,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 137679793}
   m_HandleRect: {fileID: 155360813}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 10
+  m_MinValue: 5
+  m_MaxValue: 20
   m_WholeNumbers: 1
-  m_Value: 1
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3617,7 +3681,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -22.909964, y: -66}
+  m_AnchoredPosition: {x: -22.909964, y: -64.90401}
   m_SizeDelta: {x: 485.316, y: 104.766}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1229571254
@@ -3665,7 +3729,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1418002301}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 10
+  m_MaxValue: 5
   m_WholeNumbers: 1
   m_Value: 1
   m_OnValueChanged:
@@ -4105,6 +4169,7 @@ GameObject:
   - component: {fileID: 1540171693}
   - component: {fileID: 1540171695}
   - component: {fileID: 1540171694}
+  - component: {fileID: 1540171696}
   m_Layer: 5
   m_Name: PredTravDistTxt
   m_TagString: Untagged
@@ -4129,8 +4194,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.141, y: -129}
-  m_SizeDelta: {x: 412.918, y: 63.641}
+  m_AnchoredPosition: {x: 34.297977, y: -129}
+  m_SizeDelta: {x: 481.7, y: 63.641}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1540171694
 MonoBehaviour:
@@ -4231,6 +4296,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540171692}
   m_CullTransparentMesh: 1
+--- !u!114 &1540171696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540171692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd9c256b50068747b8a0d5cf35d2ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: 'Predator Travel Distance: '
+  slider: {fileID: 2115698583}
+  sliderText: {fileID: 1540171694}
 --- !u!1 &1607378997
 GameObject:
   m_ObjectHideFlags: 0
@@ -4417,7 +4497,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000022888, y: -365}
+  m_AnchoredPosition: {x: 0.000022888184, y: -365}
   m_SizeDelta: {x: 248.726, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1664983357
@@ -5076,6 +5156,7 @@ GameObject:
   - component: {fileID: 1802833234}
   - component: {fileID: 1802833236}
   - component: {fileID: 1802833235}
+  - component: {fileID: 1802833237}
   m_Layer: 5
   m_Name: TurnNumTxt
   m_TagString: Untagged
@@ -5202,6 +5283,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1802833233}
   m_CullTransparentMesh: 1
+--- !u!114 &1802833237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802833233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd9c256b50068747b8a0d5cf35d2ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: '# of Turns: '
+  slider: {fileID: 1165164318}
+  sliderText: {fileID: 1802833235}
 --- !u!1 &1808120674
 GameObject:
   m_ObjectHideFlags: 0
@@ -5213,6 +5309,7 @@ GameObject:
   - component: {fileID: 1808120675}
   - component: {fileID: 1808120677}
   - component: {fileID: 1808120676}
+  - component: {fileID: 1808120678}
   m_Layer: 5
   m_Name: PredRadTxt
   m_TagString: Untagged
@@ -5237,8 +5334,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000026703, y: 168}
-  m_SizeDelta: {x: 348.125, y: 53.41}
+  m_AnchoredPosition: {x: 17.477, y: 166.904}
+  m_SizeDelta: {x: 431.589, y: 51.217}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1808120676
 MonoBehaviour:
@@ -5339,6 +5436,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1808120674}
   m_CullTransparentMesh: 1
+--- !u!114 &1808120678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808120674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd9c256b50068747b8a0d5cf35d2ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: 'Predator Turn Radius: '
+  slider: {fileID: 1981397991}
+  sliderText: {fileID: 1808120676}
 --- !u!1 &1809394738
 GameObject:
   m_ObjectHideFlags: 0
@@ -5486,7 +5598,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -50.96801, y: -58.294983}
+  m_AnchoredPosition: {x: -34.297977, y: -58.29492}
   m_SizeDelta: {x: 485.316, y: 104.766}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1818436220
@@ -6240,7 +6352,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000022888184, y: -64.295}
+  m_AnchoredPosition: {x: -17.476917, y: -63.199005}
   m_SizeDelta: {x: 485.316, y: 104.766}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1981397991
@@ -6857,7 +6969,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 238660526}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 2
+  m_MaxValue: 5
   m_WholeNumbers: 1
   m_Value: 1
   m_OnValueChanged:
@@ -7229,7 +7341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.140997, y: -52.000046}
+  m_AnchoredPosition: {x: -34.297977, y: -52.000046}
   m_SizeDelta: {x: 485.316, y: 104.766}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2115698583
