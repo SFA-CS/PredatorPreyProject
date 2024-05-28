@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class Score : MonoBehaviour
             }
             
         }
-        if(score == 7) //if score is 7 the Prey Wins screen is displayed
+        if(score == PlayerPrefs.GetInt("TurnNum")) //if score is what the user selected in settings the Prey Wins screen is displayed
         {
             PreyWins.Setup(); 
         }
