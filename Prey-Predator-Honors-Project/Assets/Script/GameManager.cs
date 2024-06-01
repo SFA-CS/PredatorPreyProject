@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
             RaycastHit2D rayHit = Physics2D.GetRayIntersection(ray);
             if (rayHit.collider != null)
             {
-                Debug.Log(rayHit.collider.gameObject.name);
+                //Debug.Log(rayHit.collider.gameObject.name + " positions " + rayHit.collider.gameObject.transform.position);
                 this.gameState.HandleInput(rayHit.collider.gameObject, ray.origin);
             }
             Debug.Log("Mouse Position : " + mousePosition + " Ray Origin (Unity Coordinates) " + ray.origin);

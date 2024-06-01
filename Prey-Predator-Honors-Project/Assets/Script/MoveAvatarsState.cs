@@ -7,7 +7,8 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class MoveAvatorsState : GameState 
 {
     private List<Avatar> avatars;
-    
+    private float elaspsedTime = 0.0f;
+   
     public MoveAvatorsState() : base()
     {
         avatars = new List<Avatar>(GameManager.Instance.Prey);
@@ -17,13 +18,17 @@ public class MoveAvatorsState : GameState
     public override void Enter()
     {
         base.Enter();
+        foreach (Avatar avatar in avatars)
+        {
+            avatar.ComputePath();
+        }
     }
 
     private bool allReachedDestination()
     {
         foreach (Avatar avatar in avatars)
         {
-            if (Vector3.Distance(avatar.transform.localPosition, avatar.Destination) >= 0.01)
+            if (!avatar.ReachedDestination())
             {
                 return false;
             }
@@ -37,8 +42,15 @@ public class MoveAvatorsState : GameState
     public override void Update() {
         foreach (Avatar avatar in this.avatars)
         {
-            Vector3 destination = new Vector3(avatar.Destination.x, avatar.Destination.y, 0);
-            avatar.transform.localPosition = Vector3.MoveTowards(avatar.transform.localPosition, avatar.Destination, 10 * Time.deltaTime);
+            //Vector3 destination = new Vector3(avatar.Destination.x, avatar.Destination.y, 0);
+            //avatar.transform.localPosition = Vector3.MoveTowards(avatar.transform.localPosition, avatar.Destination, 10*Time.deltaTime);
+            //avatar.transform.localPosition = Vector3.MoveTowards(avatar.transform.localPosition, avatar.NextDestination(), Time.deltaTime) ;
+            elaspsedTime += Time.deltaTime;
+            if (elaspsedTime >= 0.1f)
+            {
+                avatar.MoveAlongPath();
+                elaspsedTime = 0.0f;
+            }
         }   
         
         if (this.allReachedDestination())
