@@ -66,6 +66,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PreyCaught(GameObject preyCaptured)
+    {
+        preyCaptured.gameObject.SetActive(false);
+        this.prey.Remove(preyCaptured.GetComponent<Avatar>());
+        Scoreboard.Instance.PreyRemaining = this.prey.Count; 
+        if (this.prey.Count == 0)
+        {
+            GameOverScreen.Instance.Display(false);
+        }
+
+    }
    
     public void Update()
     {
