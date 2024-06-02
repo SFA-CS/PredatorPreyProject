@@ -3,17 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameOverScreen : MonoBehaviour
 {
-    public void Setup()
+    [SerializeField]
+    private TextMeshProUGUI WinnerText;
+    public static GameOverScreen Instance { get; private set; }
+
+    private void Awake()
     {
-        gameObject.SetActive(true); //Predator Win screen is set to active aka its now visable
+        // singleton design pattern
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+    public void Display(string message)
+    {
+        WinnerText.text = message;
+        gameObject.transform.GetChild(0).gameObject.SetActive(true); //Predator Win screen is set to active aka its now visable
     }
 
     public void RestartButton()
     {
-        SceneManager.LoadScene("Game"); //if click on restart button game is reset
+        SceneManager.LoadScene("Temp"); //if click on restart button game is reset
     }
 
     public void MenuButton()

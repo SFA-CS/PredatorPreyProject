@@ -38,6 +38,11 @@ public class MoveAvatorsState : GameState
 
     public override void Exit() { base.Exit();
         Scoreboard.Instance.NumTurns = Scoreboard.Instance.NumTurns + 1;
+        if (Scoreboard.Instance.NumTurns == Scoreboard.Instance.MaxTurns)
+        {
+            GameOverState gameOverState = new GameOverState();
+            GameManager.Instance.SetState(gameOverState);
+        }
     }
     public override void Update() {
         foreach (Avatar avatar in this.avatars)

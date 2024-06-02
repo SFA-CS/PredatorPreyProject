@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         }
 
         // TODO: get from options
-        Scoreboard.Instance.MaxTurns = 10;
+        Scoreboard.Instance.MaxTurns = 5;
         Scoreboard.Instance.PreyRemaining = this.prey.Count;
         Scoreboard.Instance.NumTurns = 0;
     }
@@ -71,11 +71,17 @@ public class GameManager : MonoBehaviour
         preyCaptured.gameObject.SetActive(false);
         this.prey.Remove(preyCaptured.GetComponent<Avatar>());
         Scoreboard.Instance.PreyRemaining = this.prey.Count; 
-        if (this.prey.Count == 0)
+        if (this.AllPreyCaught())
         {
-            GameOverScreen.Instance.Display(false);
+            GameOverState gameState = new GameOverState();
+            this.SetState(gameState);
         }
 
+    }
+
+    public bool AllPreyCaught()
+    {
+        return this.prey.Count == 0;
     }
    
     public void Update()

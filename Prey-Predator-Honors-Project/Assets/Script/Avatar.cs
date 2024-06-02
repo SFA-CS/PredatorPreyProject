@@ -105,9 +105,14 @@ public class Avatar : MonoBehaviour
             //Debug.Log("Move to " + this.path[pathIndex] + " transform " + this.transform.TransformPoint(this.path[pathIndex]));
             Vector3 newPostion = this.copy.transform.TransformPoint(this.path[pathIndex]);
             Vector3 diff = newPostion - this.transform.localPosition;
-            float angle = Mathf.Acos(diff.y/diff.magnitude); // angle with <0,1>
+            if (pathIndex >= 1)
+            {
+                Vector2 diffLocal = this.path[pathIndex] - this.path[pathIndex - 1];
+                diffLocal = this.copy.transform.InverseTransformDirection(diffLocal);
+                float angle = Mathf.Acos(diffLocal.y / diffLocal.magnitude); // angle with <0,1>
+                this.transform.Rotate(0, 0, angle);
+            }
             this.transform.localPosition = newPostion;
-            this.transform.Rotate(0, 0, angle);
             this.pathIndex++;
         }
     }
