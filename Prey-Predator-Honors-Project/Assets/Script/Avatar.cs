@@ -124,10 +124,10 @@ public class Avatar : MonoBehaviour
             if (pathIndex == PATH_LENGTH - 1)
             {
                 Debug.Log(this.gameObject.name + " angle: " + angle);
-            }
-            Debug.Log("copy " + this.copy.transform.localEulerAngles + " wordl " + this.copy.transform.eulerAngles);
+            }            
             this.transform.localEulerAngles = this.copy.transform.localEulerAngles + new Vector3(0,0,angle);
-            //
+            
+            // move to next point in the path
             this.pathIndex++;
         }
     }

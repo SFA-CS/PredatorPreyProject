@@ -39,18 +39,13 @@ public class MoveAvatorsState : GameState
 
     public override void Exit() { 
         base.Exit();
-        Scoreboard.Instance.NumTurns = Scoreboard.Instance.NumTurns + 1;
-        if (Scoreboard.Instance.NumTurns == Scoreboard.Instance.MaxTurns)
-        {
-            GameOverState gameOverState = new GameOverState();
-            GameManager.Instance.SetState(gameOverState);
-        }
+        
+        
     }
     public override void Update() {
         // move each predator/prey one step (one point on the path at a time)
         foreach (Avatar avatar in this.avatars)
-        {
-            
+        {            
             elaspsedTime += Time.deltaTime;
             if (elaspsedTime >= 0.1f)
             {
@@ -61,8 +56,18 @@ public class MoveAvatorsState : GameState
         
         if (this.allReachedDestination())
         {
-            PreyTurnState preyTurn = new PreyTurnState();
-            GameManager.Instance.SetState(preyTurn);
+            Scoreboard.Instance.NumTurns = Scoreboard.Instance.NumTurns + 1;
+            if (Scoreboard.Instance.NumTurns == Scoreboard.Instance.MaxTurns)
+            {
+                GameOverState gameOverState = new GameOverState();
+                GameManager.Instance.SetState(gameOverState);
+            }
+            else
+            {
+                PreyTurnState preyTurn = new PreyTurnState();
+                GameManager.Instance.SetState(preyTurn);
+            }
+            
         }
     }
 

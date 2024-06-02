@@ -68,8 +68,12 @@ public class GameManager : MonoBehaviour
 
     public void PreyCaught(GameObject preyCaptured)
     {
+        // when a prey is capture, remove it
+        // from the game (not visible and not in current list)
         preyCaptured.gameObject.SetActive(false);
         this.prey.Remove(preyCaptured.GetComponent<Avatar>());
+
+        // if all the prey are caught move to the GAmeOverState
         Scoreboard.Instance.PreyRemaining = this.prey.Count; 
         if (this.AllPreyCaught())
         {
