@@ -27,6 +27,7 @@ public class Avatar : MonoBehaviour
 
     // path the avatar will follow when it moves
     private Vector2[] path;
+    private Vector2[] rotation;
     private const int PATH_LENGTH = 25;
     private int pathIndex = 0;
     private GameObject copy; // for transform
@@ -54,6 +55,7 @@ public class Avatar : MonoBehaviour
     public void ComputePath()
     {
         this.path = new Vector2[PATH_LENGTH];
+        this.rotation = new Vector2[PATH_LENGTH];
         this.pathIndex = 0; 
 
         Vector2 position = new Vector2(this.transform.position.x, this.transform.position.y); 
@@ -63,32 +65,34 @@ public class Avatar : MonoBehaviour
         float u =  2.0f * localDestination.x/ localDestination.sqrMagnitude;
         float endT = localDestination.sqrMagnitude * Mathf.Atan(localDestination.x / localDestination.y) / (this.MaxTravelDistance * localDestination.x);
         
-
+        // here is how we solved for the above
         // https://www.wolframalpha.com/input?i=solve+for+u+and+v+%7Bx+%3D+1%2Fu*%281-cos%28d*u*v%29%29%2C+y+%3D+1%2Fu*sin%28d*u*v%29+%7D
         float x = 0.0f;
         float y = 0.0f;
         float t = 0.0f; // paramter        
-        Vector2 offset;
+
+        // create the path (that is set the specified number of points to move along the path        
         int count = 0;
         do
         {
+            // compute point along path
             t = Mathf.Lerp(0.0f, endT, (count+1) / 25.0f);
             x = 1 / u * (1 - Mathf.Cos(this.distance * u * t));
-            y = 1 / u * Mathf.Sin(this.distance * u * t);
-            offset = new Vector2(x, y);
-            this.path[count] = offset;
-            //this.path.Add(offset + position);
-            count++;
-            // Debug.Log("u " + u  + " x " + x + " y " + y + " offset " + offset + " localDesitnation " + localDestination);
+            y = 1 / u * Mathf.Sin(this.distance * u * t);            
+            this.path[count] = new Vector2(x, y); ;
+
+            // compute rotation vector
+            x = Mathf.Sin(this.distance * u * t);
+            y = Mathf.Cos(this.distance * u * t);
+            this.rotation[count] = new Vector2(x, y);
+            count++;            
         } while (count < PATH_LENGTH);
-        //while ((offset - localDestination).magnitude > 0.001 && count <= 100);
-        Debug.Log("endT " + endT + " t " + t + " count " +  count + " u " + u + " x " + x + " y " + y + " offset " + offset + " localDesitnation " + localDestination);
-        Debug.Log("Offset Avatar Point: " + this.transform.TransformPoint(offset));
-        //Debug.Log("Offset Avatar Direction: " + this.transform.TransformDirection(offset ));
-        //Debug.Log("Offset MoveArea Point: " + this.moveArea.gameObject.transform.TransformPoint(offset));
-        //Debug.Log("Offset MoveArea Direction: " + this.moveArea.gameObject.transform.TransformDirection(offset));
-        //Debug.Log("Offset Parent Point: " + this.gameObject.transform.parent.transform.TransformPoint(offset));
-        //Debug.Log("Offset Parent Direction: " + this.gameObject.transform.parent.transform.TransformDirection(offset));
+
+        Debug.Log(this.gameObject.name);
+        Debug.Log("endT " + endT + " t " + t + " count " +  count + " u " + u + " last point in path " + this.path[path.Length-1] + " localDesitnation " + localDestination);
+        Debug.Log("End Tangent Vector: " + x + ", " + y);
+        
+        // keep a copy of the current transform for reference as we move along path
         if (this.copy != null)
         {
             Destroy(this.copy);
@@ -102,17 +106,28 @@ public class Avatar : MonoBehaviour
     {
         if (!this.ReachedDestination())
         {
-            //Debug.Log("Move to " + this.path[pathIndex] + " transform " + this.transform.TransformPoint(this.path[pathIndex]));
+            // set position
             Vector3 newPostion = this.copy.transform.TransformPoint(this.path[pathIndex]);
-            Vector3 diff = newPostion - this.transform.localPosition;
-            if (pathIndex >= 1)
-            {
-                Vector2 diffLocal = this.path[pathIndex] - this.path[pathIndex - 1];
-                diffLocal = this.copy.transform.InverseTransformDirection(diffLocal);
-                float angle = Mathf.Acos(diffLocal.y / diffLocal.magnitude); // angle with <0,1>
-                this.transform.Rotate(0, 0, angle);
-            }
+            //Vector3 diff = newPostion - this.transform.localPosition;
             this.transform.localPosition = newPostion;
+            
+            
+            // set rotation by finding angle with z-axis
+            // this will be in radians
+            float angle = Mathf.Acos(rotation[pathIndex].y); // angle with <0,1>
+            if (rotation[pathIndex].x > 0)
+            {
+                angle = -angle;
+            }
+            // change to degrees
+            angle = angle * Mathf.Rad2Deg;
+            if (pathIndex == PATH_LENGTH - 1)
+            {
+                Debug.Log(this.gameObject.name + " angle: " + angle);
+            }
+            Debug.Log("copy " + this.copy.transform.localEulerAngles + " wordl " + this.copy.transform.eulerAngles);
+            this.transform.localEulerAngles = this.copy.transform.localEulerAngles + new Vector3(0,0,angle);
+            //
             this.pathIndex++;
         }
     }

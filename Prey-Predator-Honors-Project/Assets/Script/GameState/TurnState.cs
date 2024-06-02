@@ -50,7 +50,7 @@ public class TurnState : GameState
         {            
             if (avatar.MovementArea.gameObject == clickedObject)
             {
-                Debug.Log("Handle Input: Local location of click: " + avatar.gameObject.name + " " + avatar.transform.InverseTransformPoint(location));
+                //Debug.Log("Handle Input: Local location of click: " + avatar.gameObject.name + " " + avatar.transform.InverseTransformPoint(location));
                 //Debug.Log(avatar.transform.InverseTransformDirection(location));
                 avatar.HideLegalMoveArea();
                 //avatar.Destination = location;              

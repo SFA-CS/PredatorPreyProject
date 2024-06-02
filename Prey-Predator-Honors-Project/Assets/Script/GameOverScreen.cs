@@ -32,7 +32,7 @@ public class GameOverScreen : MonoBehaviour
 
     public void RestartButton()
     {
-        SceneManager.LoadScene("Temp"); //if click on restart button game is reset
+        SceneManager.LoadScene("PredatorPrey"); //if click on restart button game is reset
     }
 
     public void MenuButton()

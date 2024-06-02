@@ -11,6 +11,7 @@ public class MoveAvatorsState : GameState
    
     public MoveAvatorsState() : base()
     {
+        // we move the predators and prey simultaneously
         avatars = new List<Avatar>(GameManager.Instance.Prey);
         avatars.AddRange(GameManager.Instance.Predators);        
     }
@@ -36,7 +37,8 @@ public class MoveAvatorsState : GameState
         return true;
     }
 
-    public override void Exit() { base.Exit();
+    public override void Exit() { 
+        base.Exit();
         Scoreboard.Instance.NumTurns = Scoreboard.Instance.NumTurns + 1;
         if (Scoreboard.Instance.NumTurns == Scoreboard.Instance.MaxTurns)
         {
@@ -45,11 +47,10 @@ public class MoveAvatorsState : GameState
         }
     }
     public override void Update() {
+        // move each predator/prey one step (one point on the path at a time)
         foreach (Avatar avatar in this.avatars)
         {
-            //Vector3 destination = new Vector3(avatar.Destination.x, avatar.Destination.y, 0);
-            //avatar.transform.localPosition = Vector3.MoveTowards(avatar.transform.localPosition, avatar.Destination, 10*Time.deltaTime);
-            //avatar.transform.localPosition = Vector3.MoveTowards(avatar.transform.localPosition, avatar.NextDestination(), Time.deltaTime) ;
+            
             elaspsedTime += Time.deltaTime;
             if (elaspsedTime >= 0.1f)
             {
