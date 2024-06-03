@@ -10,17 +10,20 @@ public class Avatar : MonoBehaviour
     [SerializeField]
     [Tooltip("The maximum travel distance")]
     private float distance = 2.0f;
-    public float MaxTravelDistance { get { return distance; } }
+    public float MaxTravelDistance { get { return distance; }  }
 
     [SerializeField]
     [Tooltip("The turing radius.")]
     private float radius = 1.4f;
-    public float TurningRadius { get { return radius; } }
+    public float TurningRadius
+    {
+        get { return radius; }       
+    }
 
-    [SerializeField]
+        [SerializeField]
     [Tooltip("Create legal move area for predator/prey.")]
     private MoveArea moveArea;
-    public MoveArea MovementArea { get { return moveArea; } }
+    public MoveArea MovementArea { get { return moveArea; }  }
 
     private Vector2 destination;
     public Vector2 Destination {  get { return destination; } set { destination = value; } }
@@ -32,8 +35,12 @@ public class Avatar : MonoBehaviour
     private int pathIndex = 0;
     private GameObject copy; // for transform
 
-    public void Start()
+    public void CreateMovementArea(float turnRadius, float maxTravelDistance)
     {
+        if (maxTravelDistance > 0)
+            this.distance = maxTravelDistance;
+        if (turnRadius > 0)  
+            this.radius = turnRadius;
         this.moveArea.CreateMoveArea(this.radius, this.distance);
     }
 

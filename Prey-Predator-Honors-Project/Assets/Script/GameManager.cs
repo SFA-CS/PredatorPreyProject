@@ -32,20 +32,72 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
        
-        this.SetState(new PreyTurnState());
+        
     }
 
     private void Start()
     {
+        
+        // set up the prey
+        int num = PlayerPrefs.GetInt(GameOptions.PREY_NUMBER);
+        this.prey.RemoveRange(num, this.prey.Count - num);
+        float travelDistance = PlayerPrefs.GetFloat(GameOptions.PREY_DISTANCE);
+        float turnRadius = PlayerPrefs.GetFloat(GameOptions.PREY_RADIUS);
+        foreach (Avatar avatar in this.prey)
+        {
+            avatar.gameObject.SetActive(true);
+            avatar.CreateMovementArea(turnRadius, travelDistance);            
+        }
+
+        // set up the predators
+        num = PlayerPrefs.GetInt(GameOptions.PREDATOR_NUMBER);
+        this.predators.RemoveRange(num, this.predators.Count - num);
+        travelDistance = PlayerPrefs.GetFloat(GameOptions.PREDATOR_DISTANCE);
+        turnRadius = PlayerPrefs.GetFloat(GameOptions.PREDATOR_RADIUS);
         foreach (Avatar avatar in this.predators)
         {
+            avatar.gameObject.SetActive(true);
+            avatar.CreateMovementArea(turnRadius, travelDistance);
             avatar.HideLegalMoveArea();
         }
 
-        // TODO: get from options
-        Scoreboard.Instance.MaxTurns = 5;
+        // set up location of predator/prey based on proximity
+        // Close: 4 x max travel distance
+        // Mid : 8 x max travel distance
+        // Far: 12 x max travel distance
+        int prox = PlayerPrefs.GetInt(GameOptions.PROXIMITY);
+        float maxTravelDist = Mathf.Max(this.prey[0].MaxTravelDistance, this.predators[0].MaxTravelDistance);
+        float location = ((prox + 1) * 4 * maxTravelDist)/2;
+        Debug.Log("Location: " + location + " Prox: " + prox);
+        float offset = 0; int count = 0;
+        foreach (Avatar avatar in this.prey)
+        {
+            avatar.gameObject.transform.localPosition = new Vector3(-(location+offset), avatar.transform.localPosition.y, avatar.transform.localPosition.z);
+            count++;
+            if (count % 3 == 0)
+                offset += 2.0f;
+        }
+
+        offset = 0; count = 0;
+        foreach (Avatar avatar in this.predators)
+        {
+            avatar.gameObject.transform.localPosition = new Vector3(location + offset, avatar.transform.localPosition.y, avatar.transform.localPosition.z);
+            count++;
+            if (count % 3 == 0)
+                offset += 2.0f;
+        }
+
+        // zoom out if necessary
+        if (location >= 10)
+            Camera.main.orthographicSize = location / 2.0f;
+
+        // set up the scoreboard
+        Scoreboard.Instance.MaxTurns = PlayerPrefs.GetInt(GameOptions.TURNS);        
         Scoreboard.Instance.PreyRemaining = this.prey.Count;
         Scoreboard.Instance.NumTurns = 0;
+
+        // set the game state
+        this.SetState(new PreyTurnState());
     }
 
     public void OnClick(InputAction.CallbackContext context)

@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameOptions;
 
 public class GameOptions : MonoBehaviour
 {
@@ -13,23 +16,59 @@ public class GameOptions : MonoBehaviour
     public const string PREY_DISTANCE = "PreyTravDist";
     public const string PREDATOR_DISTANCE = "PredTravDist";
     public const string PROXIMITY = "PROXIMITY";
+    public enum Proximity { Close=0, Mid=1, Far=2 };
 
-    public Slider PreyNumSlider;
-    public Slider PredNumSlider;
-    public Slider TurnNumSlider;
-    public Slider PreyRadSlider;
-    public Slider PredRadSlider;
-    public Slider PreyTravDistSlider;
-    public Slider PredTravDistSlider;
+    [SerializeField]
+    private Slider PreyNumSlider;
+
+    [SerializeField]
+    private Slider PredNumSlider;
+
+    [SerializeField]
+    private Slider TurnNumSlider;
+
+    [SerializeField]
+    private Slider PreyRadSlider;
+
+    [SerializeField]
+    private Slider PredRadSlider;
+
+    [SerializeField]
+    private Slider PreyTravDistSlider;
+
+    [SerializeField]
+    private  Slider PredTravDistSlider;
+
+    [SerializeField]
+    private TMP_Dropdown DistanceDropDown;
     // Start is called before the first frame update
+
+
     void Start()
     {
-        // TODO: SET DEFAULTS
-    }
+        PlayerPrefs.SetInt(PREY_NUMBER,  3);
+        this.PreyNumSlider.SetValueWithoutNotify(3);
+        
+        PlayerPrefs.SetInt(PREDATOR_NUMBER, 2);
+        this.PredNumSlider.SetValueWithoutNotify(2);
+        
+        PlayerPrefs.SetInt(TURNS, 10);
+        this.TurnNumSlider.SetValueWithoutNotify(10);
+        
+        PlayerPrefs.SetFloat(PREY_RADIUS, 1.0f);
+        this.PreyRadSlider.SetValueWithoutNotify(1.0f);
+        
+        PlayerPrefs.SetFloat(PREDATOR_RADIUS, 2.0f);
+        this.PredRadSlider.SetValueWithoutNotify(2.0f);
 
-    // Update is called once per frame
-    void Update()
-    {   PlayerPrefs.SetFloat("", PredTravDistSlider.value);
+        PlayerPrefs.SetFloat(PREY_DISTANCE, 1.5f);
+        this.PreyTravDistSlider.SetValueWithoutNotify(1.5f);
+
+        PlayerPrefs.SetFloat(PREDATOR_DISTANCE, 2.5f);
+        this.PredTravDistSlider.SetValueWithoutNotify(2.5f);
+
+        PlayerPrefs.SetInt(PROXIMITY, (int) Proximity.Mid);
+        this.DistanceDropDown.SetValueWithoutNotify((int)Proximity.Mid);
     }
 
     public void SetNumberOfPrey(float num)
@@ -40,7 +79,6 @@ public class GameOptions : MonoBehaviour
     public void SetNumberOfPredators(float num)
     {
         PlayerPrefs.SetInt(PREDATOR_NUMBER, (int) num);
-
     }
 
     public void SetNumberOfTurns(float num)
@@ -51,7 +89,6 @@ public class GameOptions : MonoBehaviour
     public void SetPreyRadius(float radius)
     {
         PlayerPrefs.SetFloat(PREY_RADIUS, radius);
-
     }
 
     public void SetPredatorRadius(float radius)
@@ -61,16 +98,16 @@ public class GameOptions : MonoBehaviour
 
     public void SetPreyMaxTravelDistance(float  distance)
     {
-        PlayerPrefs.SetFloat(PREY_DISTANCE, PreyTravDistSlider.value);
+        PlayerPrefs.SetFloat(PREY_DISTANCE, distance);
     }
 
     public void SetPredatorMaxTravelDistance(float distance)
     {
-        PlayerPrefs.SetFloat(PREDATOR_DISTANCE, PreyTravDistSlider.value);
+        PlayerPrefs.SetFloat(PREDATOR_DISTANCE, distance);
     }
 
     public void SetProximity(int proximity)
-    {
+    {   
         PlayerPrefs.SetInt(PROXIMITY, proximity);
     }
 }
