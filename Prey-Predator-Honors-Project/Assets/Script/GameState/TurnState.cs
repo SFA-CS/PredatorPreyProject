@@ -16,8 +16,7 @@ public class TurnState : GameState
         base.Enter();
       
         foreach (Avatar avatar in avatars)
-        {
-            Debug.Log(avatar.gameObject.name);
+        {            
             avatar.ShowLegalMoveArea();
         }
     }
@@ -51,8 +50,11 @@ public class TurnState : GameState
         {            
             if (avatar.MovementArea.gameObject == clickedObject)
             {
+                //Debug.Log("Handle Input: Local location of click: " + avatar.gameObject.name + " " + avatar.transform.InverseTransformPoint(location));
+                //Debug.Log(avatar.transform.InverseTransformDirection(location));
                 avatar.HideLegalMoveArea();
-                avatar.Destination = location;              
+                //avatar.Destination = location;              
+                avatar.Destination = avatar.transform.InverseTransformPoint(location);
             }
         }       
         

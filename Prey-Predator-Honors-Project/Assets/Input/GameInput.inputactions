@@ -1,5 +1,5 @@
 {
-    "name": "UIvsGameInput",
+    "name": "GameInput",
     "maps": [
         {
             "name": "Player",
@@ -36,6 +36,15 @@
                     "name": "ResetCamera",
                     "type": "Button",
                     "id": "194942d0-922a-40ed-98e7-7a86bfd353d5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveAvatar",
+                    "type": "Button",
+                    "id": "965f30c3-9d51-4a95-9855-6845abd650a7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -333,6 +342,28 @@
                     "action": "MoveCamera",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "370723b4-fd4e-4a1b-b69e-ef6fdb306e3d",
+                    "path": "*/{PrimaryAction}",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad;Joystick;XR",
+                    "action": "MoveAvatar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3ad5647c-7b60-4d67-aed7-d6040fe8ad27",
+                    "path": "<Touchscreen>/press",
+                    "interactions": "MultiTap(tapTime=0.5)",
+                    "processors": "",
+                    "groups": "Touch",
+                    "action": "MoveAvatar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

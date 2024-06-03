@@ -12,7 +12,7 @@ public class CollisionController : MonoBehaviour
         if(collision.gameObject.name == "Predator Sprite" || collision.gameObject.name == "Prey Sprite") //if either sprite runs into each other
         {
             Debug.Log("Prey is Dead"); //Test for collider working
-            GameOverScreen.Setup(); //Game Over Screen is Shown
+            GameOverScreen.Display(""); //Game Over Screen is Shown
         }
     }
 
