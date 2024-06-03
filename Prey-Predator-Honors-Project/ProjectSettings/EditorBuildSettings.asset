@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: a41ecaa1e06e38b43877f04b80b5c9ed
-  - enabled: 0
-    path: Assets/Scenes/Game.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/PredatorPrey.unity
     guid: 0708ae03421df3c4eae9469bd0894297
