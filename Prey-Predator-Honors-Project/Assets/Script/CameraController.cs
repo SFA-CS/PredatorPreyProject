@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     // bools to determine when the user is clicking/letting go of ZoomIn, ZoomOut buttons
     private bool zoomIn = false;
     private bool zoomOut = false;
-    private float orthoSize = 5.0f; // stores default size for camera; used to reset zooming
+    private float orthoSize = 7.5f; // stores default size for camera; used to reset zooming
 
 
     private void Start()
