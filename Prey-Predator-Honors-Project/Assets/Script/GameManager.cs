@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
 
         // zoom out if necessary
         if (location >= 10)
-            Camera.main.orthographicSize = (location+offset) / 2.0f;
+            CameraController.Instance.SetCameraViewSize(location+offset);
 
         // set up the scoreboard
         Scoreboard.Instance.MaxTurns = PlayerPrefs.GetInt(GameOptions.TURNS);        

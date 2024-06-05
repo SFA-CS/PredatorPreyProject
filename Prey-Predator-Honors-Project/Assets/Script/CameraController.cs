@@ -23,9 +23,32 @@ public class CameraController : MonoBehaviour
     private float orthoSize = 7.5f; // stores default size for camera; used to reset zooming
 
 
+    public static CameraController Instance { get; private set; }
+
+    private void Awake()
+    {
+        // singleton design pattern
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
+    }
+
+
+
     private void Start()
     {
         this.orthoSize = Camera.main.orthographicSize;
+    }
+
+    public void SetCameraViewSize(float size)
+    {
+        Camera.main.orthographicSize = size;
     }
 
     public void ZoomIn()
