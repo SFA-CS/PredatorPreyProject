@@ -13,11 +13,11 @@ public class PreyWins : MonoBehaviour
 
     public void RestartButton()
     {
-        SceneManager.LoadScene("Game"); //if click on restart button game is reset
+        SceneManager.LoadScene("BearRacoonGame"); //if click on restart button game is reset
     }
 
     public void MenuButton()
     {
-        SceneManager.LoadScene("Main Menu"); //if click on main menu button you are sent to the menu
+        SceneManager.LoadScene("MainMenu"); //if click on main menu button you are sent to the menu
     }
 }
