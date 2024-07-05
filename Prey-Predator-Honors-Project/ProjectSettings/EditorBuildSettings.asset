@@ -9,7 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: a41ecaa1e06e38b43877f04b80b5c9ed
   - enabled: 1
-    path: Assets/Scenes/PredatorPrey.unity
+    path: Assets/Scenes/PredatorPreyTemplate.unity
     guid: 0708ae03421df3c4eae9469bd0894297
+  - enabled: 1
+    path: Assets/Scenes/BearRacoonGame.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 2f91372e5848c234c9b3f584e9a425b4, type: 2}
