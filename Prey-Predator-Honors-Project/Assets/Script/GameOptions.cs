@@ -11,12 +11,16 @@ public class GameOptions : MonoBehaviour
     public const string PREY_NUMBER = "PreyNum";
     public const string PREDATOR_NUMBER = "PredNum";
     public const string TURNS = "TurnNum";
+
     public const string PREY_RADIUS = "PreyRad";
     public const string PREDATOR_RADIUS = "PredRad";
     public const string PREY_DISTANCE = "PreyTravDist";
     public const string PREDATOR_DISTANCE = "PredTravDist";
     public const string PROXIMITY = "PROXIMITY";
     public enum Proximity { Close=0, Mid=1, Far=2 };
+    public const string VERSION = "VERSION";
+    public enum Version { MissileShip = 0, PredatorPrey = 1 };
+    public static readonly string[] VersionName = { "MissileShipGame", "PredatorPreyTemplate" };
 
     [SerializeField]
     private Slider PreyNumSlider;
@@ -41,6 +45,9 @@ public class GameOptions : MonoBehaviour
 
     [SerializeField]
     private TMP_Dropdown DistanceDropDown;
+
+    [SerializeField]
+    private TMP_Dropdown VersionDropDown;
     // Start is called before the first frame update
 
 
@@ -69,6 +76,9 @@ public class GameOptions : MonoBehaviour
 
         PlayerPrefs.SetInt(PROXIMITY, (int) Proximity.Mid);
         this.DistanceDropDown.SetValueWithoutNotify((int)Proximity.Mid);
+
+        PlayerPrefs.SetInt(VERSION, (int)Version.MissileShip);
+        this.VersionDropDown.SetValueWithoutNotify((int)(Version.MissileShip));
     }
 
     public void SetNumberOfPrey(float num)
@@ -109,5 +119,15 @@ public class GameOptions : MonoBehaviour
     public void SetProximity(int proximity)
     {   
         PlayerPrefs.SetInt(PROXIMITY, proximity);
+    }
+
+    public void setVersion(int version)
+    {
+        PlayerPrefs.SetInt(VERSION, version);
+    }
+
+    public static string GetVersionName()
+    {
+        return VersionName[PlayerPrefs.GetInt(VERSION)];
     }
 }
