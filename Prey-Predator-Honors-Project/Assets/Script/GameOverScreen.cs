@@ -32,11 +32,11 @@ public class GameOverScreen : MonoBehaviour
 
     public void RestartButton()
     {
-        SceneManager.LoadScene("PredatorPrey"); //if click on restart button game is reset
+        SceneManager.LoadScene("MissileShipGame"); //if click on restart button game is reset
     }
 
     public void MenuButton()
     {
-        SceneManager.LoadScene("Main Menu"); //if click on main menu button you are sent to the menu
+        SceneManager.LoadScene("MainMenu"); //if click on main menu button you are sent to the menu
     }
 }
