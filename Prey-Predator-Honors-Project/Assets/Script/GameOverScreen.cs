@@ -37,6 +37,6 @@ public class GameOverScreen : MonoBehaviour
 
     public void MenuButton()
     {
-        SceneManager.LoadScene("Main Menu"); //if click on main menu button you are sent to the menu
+        SceneManager.LoadScene("MainMenu"); //if click on main menu button you are sent to the menu
     }
 }
