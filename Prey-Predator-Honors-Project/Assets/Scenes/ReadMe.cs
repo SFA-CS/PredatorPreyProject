@@ -1,0 +1,2 @@
+// If you make a new scene to add a new version of the game, remember to change the game options script to include the new game version you created in the enum 'Version' and in the array of strings 'Version Name'
+// Additionally, in the MainMenu scene, make sure to match up the version drop down (in the VersionObject), with the enum 'Version'

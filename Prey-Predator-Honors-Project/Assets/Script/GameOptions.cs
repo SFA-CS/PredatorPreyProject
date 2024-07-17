@@ -19,8 +19,9 @@ public class GameOptions : MonoBehaviour
     public const string PROXIMITY = "PROXIMITY";
     public enum Proximity { Close=0, Mid=1, Far=2 };
     public const string VERSION = "VERSION";
-    public enum Version { MissileShip = 0, PredatorPrey = 1 };
-    public static readonly string[] VersionName = { "MissileShipGame", "PredatorPreyTemplate" };
+
+    public enum Version { BearDeer = 0, BearFox = 1, BearRacoon = 2, MissileShip = 3, TigerDeer = 4, TigerFox = 5, TigerRacoon = 6 };
+    public static readonly string[] VersionName = { "BearDeerGame", "BearFoxGame", "BearRacoonGame", "MissileShipGame", "TigerDeerGame", "TigerFoxGame", "TigerRacoonGame" };
 
     [SerializeField]
     private Slider PreyNumSlider;
