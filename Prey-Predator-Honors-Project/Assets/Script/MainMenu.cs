@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
     {
         // the number here is the sceneBuildIndex
         // we are going to use the scene name instead
-        SceneManager.LoadSceneAsync("BearRacoonGame");
+        SceneManager.LoadSceneAsync(GameOptions.GetVersionName());
     }
 
     public void QuitGame()
