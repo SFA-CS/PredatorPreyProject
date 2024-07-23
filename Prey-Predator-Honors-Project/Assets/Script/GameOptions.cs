@@ -20,9 +20,11 @@ public class GameOptions : MonoBehaviour
     public enum Proximity { Close=0, Mid=1, Far=2 };
     public const string VERSION = "VERSION";
 
-    public enum Version { BearDeer = 0, BearFox = 1, BearRacoon = 2, MissileShip = 3, TigerDeer = 4, TigerFox = 5, TigerRacoon = 6 }; // choices in dropdown
+    public enum Version { BearDeer = 0, BearFox = 1, BearRacoon = 2, MissileShip = 3, TigerDeer = 4, TigerFox = 5, TigerRacoon = 6, Custom = 7 }; // choices in dropdown
     public static readonly string[] VersionName = { "BearDeerGame", "BearFoxGame", "BearRacoonGame", "MissileShipGame", "TigerDeerGame", "TigerFoxGame", "TigerRacoonGame", "CustomGame" }; // scene names
 
+    // these objects still need to be made !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public GameObject customGameObjects;
 
     [SerializeField]
     private Slider PreyNumSlider;
@@ -126,6 +128,17 @@ public class GameOptions : MonoBehaviour
     public void setVersion(int version)
     {
         PlayerPrefs.SetInt(VERSION, version);
+
+        // is this version the custom one
+        if (version == (int)Version.Custom)
+        {
+            customGameObjects.SetActive(true);
+        }
+        else
+        {
+            customGameObjects.SetActive(false);
+        }
+
     }
 
     public static string GetVersionName()
