@@ -20,8 +20,9 @@ public class GameOptions : MonoBehaviour
     public enum Proximity { Close=0, Mid=1, Far=2 };
     public const string VERSION = "VERSION";
 
-    public enum Version { BearDeer = 0, BearFox = 1, BearRacoon = 2, MissileShip = 3, TigerDeer = 4, TigerFox = 5, TigerRacoon = 6 };
-    public static readonly string[] VersionName = { "BearDeerGame", "BearFoxGame", "BearRacoonGame", "MissileShipGame", "TigerDeerGame", "TigerFoxGame", "TigerRacoonGame" };
+    public enum Version { BearDeer = 0, BearFox = 1, BearRacoon = 2, MissileShip = 3, TigerDeer = 4, TigerFox = 5, TigerRacoon = 6 }; // choices in dropdown
+    public static readonly string[] VersionName = { "BearDeerGame", "BearFoxGame", "BearRacoonGame", "MissileShipGame", "TigerDeerGame", "TigerFoxGame", "TigerRacoonGame", "CustomGame" }; // scene names
+
 
     [SerializeField]
     private Slider PreyNumSlider;
