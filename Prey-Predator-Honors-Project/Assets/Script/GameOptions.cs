@@ -32,9 +32,12 @@ public class GameOptions : MonoBehaviour
 
     public const string PREDATOR = "PREDATOR";
     public enum Predator { Bear = 0, Tiger = 1 };
-
-    // these objects still need to be made !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+    // objects that allow user to customize scene
     public GameObject customGameObjects;
+
+    // to get prefabs for custom game
+    public PrefabLoader prefabLoader;
 
     [SerializeField]
     private Slider PreyNumSlider;
@@ -73,8 +76,6 @@ public class GameOptions : MonoBehaviour
     private TMP_Dropdown PredatorDropDown;
 
     // Start is called before the first frame update
-
-
     void Start()
     {
         PlayerPrefs.SetInt(PREY_NUMBER,  3);
@@ -162,6 +163,7 @@ public class GameOptions : MonoBehaviour
         if (version == (int)Version.Custom)
         {
             customGameObjects.SetActive(true);
+            prefabLoader.LoadPrefabs();
         }
         else
         {
