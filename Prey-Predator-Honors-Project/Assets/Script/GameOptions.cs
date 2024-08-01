@@ -16,12 +16,28 @@ public class GameOptions : MonoBehaviour
     public const string PREDATOR_RADIUS = "PredRad";
     public const string PREY_DISTANCE = "PreyTravDist";
     public const string PREDATOR_DISTANCE = "PredTravDist";
+
     public const string PROXIMITY = "PROXIMITY";
     public enum Proximity { Close=0, Mid=1, Far=2 };
-    public const string VERSION = "VERSION";
 
-    public enum Version { BearDeer = 0, BearFox = 1, BearRacoon = 2, MissileShip = 3, TigerDeer = 4, TigerFox = 5, TigerRacoon = 6 };
-    public static readonly string[] VersionName = { "BearDeerGame", "BearFoxGame", "BearRacoonGame", "MissileShipGame", "TigerDeerGame", "TigerFoxGame", "TigerRacoonGame" };
+    public const string VERSION = "VERSION";
+    public enum Version { BearDeer = 0, BearFox = 1, BearRacoon = 2, MissileShip = 3, TigerDeer = 4, TigerFox = 5, TigerRacoon = 6, Custom = 7 }; // choices in dropdown
+    public static readonly string[] VersionName = { "BearDeerGame", "BearFoxGame", "BearRacoonGame", "MissileShipGame", "TigerDeerGame", "TigerFoxGame", "TigerRacoonGame", "CustomGame" }; // scene names
+
+    public const string BACKGROUND = "BACKGROUND";
+    public enum Background { Space = 0, Backyard = 1 };
+
+    public const string PREY = "PREY";
+    public enum Prey { Fox = 0, Deer = 1 };
+
+    public const string PREDATOR = "PREDATOR";
+    public enum Predator { Bear = 0, Tiger = 1 };
+    
+    // objects that allow user to customize scene
+    public GameObject customGameObjects;
+
+    // to get prefabs for custom game
+    public PrefabLoader prefabLoader;
 
     [SerializeField]
     private Slider PreyNumSlider;
@@ -49,9 +65,17 @@ public class GameOptions : MonoBehaviour
 
     [SerializeField]
     private TMP_Dropdown VersionDropDown;
+
+    [SerializeField]
+    private TMP_Dropdown BackgroundDropDown;
+
+    [SerializeField]
+    private TMP_Dropdown PreyDropDown;
+
+    [SerializeField]
+    private TMP_Dropdown PredatorDropDown;
+
     // Start is called before the first frame update
-
-
     void Start()
     {
         PlayerPrefs.SetInt(PREY_NUMBER,  3);
@@ -80,6 +104,15 @@ public class GameOptions : MonoBehaviour
 
         PlayerPrefs.SetInt(VERSION, (int)Version.MissileShip);
         this.VersionDropDown.SetValueWithoutNotify((int)(Version.MissileShip));
+
+        PlayerPrefs.SetInt(BACKGROUND, (int)Background.Space);
+        this.BackgroundDropDown.SetValueWithoutNotify((int)(Background.Space));
+
+        PlayerPrefs.SetInt(PREY, (int)Prey.Fox);
+        this.PreyDropDown.SetValueWithoutNotify((int)(Prey.Fox));
+
+        PlayerPrefs.SetInt(PREDATOR, (int)Predator.Bear);
+        this.PredatorDropDown.SetValueWithoutNotify((int)(Predator.Bear));
     }
 
     public void SetNumberOfPrey(float num)
@@ -122,13 +155,40 @@ public class GameOptions : MonoBehaviour
         PlayerPrefs.SetInt(PROXIMITY, proximity);
     }
 
-    public void setVersion(int version)
+    public void SetVersion(int version)
     {
         PlayerPrefs.SetInt(VERSION, version);
+
+        // is this version the custom one
+        if (version == (int)Version.Custom)
+        {
+            customGameObjects.SetActive(true);
+            prefabLoader.LoadPrefabs();
+        }
+        else
+        {
+            customGameObjects.SetActive(false);
+        }
+
     }
 
     public static string GetVersionName()
     {
         return VersionName[PlayerPrefs.GetInt(VERSION)];
+    }
+
+    public void SetBackground(int background)
+    {
+        PlayerPrefs.SetInt(BACKGROUND, background);
+    }
+
+    public void SetPrey(int prey)
+    {
+        PlayerPrefs.SetInt(PREY, prey);
+    }
+
+    public void SetPredator(int predator)
+    {
+        PlayerPrefs.SetInt(PREDATOR, predator);
     }
 }
