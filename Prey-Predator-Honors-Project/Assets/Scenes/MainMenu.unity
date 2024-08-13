@@ -2947,6 +2947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb149e91500ca754aba6fba7443f99f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabLoader: {fileID: 1808575486}
 --- !u!1 &287401061
 GameObject:
   m_ObjectHideFlags: 0
@@ -3470,7 +3471,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customGameObjects: {fileID: 1808575484}
-  prefabLoader: {fileID: 1808575486}
   PreyNumSlider: {fileID: 2056298595}
   PredNumSlider: {fileID: 1229571254}
   TurnNumSlider: {fileID: 1165164318}

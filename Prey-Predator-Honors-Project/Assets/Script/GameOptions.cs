@@ -36,8 +36,7 @@ public class GameOptions : MonoBehaviour
     // objects that allow user to customize scene
     public GameObject customGameObjects;
 
-    // to get prefabs for custom game
-    public PrefabLoader prefabLoader;
+    
 
     [SerializeField]
     private Slider PreyNumSlider;
@@ -78,6 +77,8 @@ public class GameOptions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("We are here1");
+
         PlayerPrefs.SetInt(PREY_NUMBER,  3);
         this.PreyNumSlider.SetValueWithoutNotify(3);
         
@@ -158,12 +159,13 @@ public class GameOptions : MonoBehaviour
     public void SetVersion(int version)
     {
         PlayerPrefs.SetInt(VERSION, version);
+        Debug.Log("We are here Version");
 
         // is this version the custom one
         if (version == (int)Version.Custom)
         {
             customGameObjects.SetActive(true);
-            prefabLoader.LoadPrefabs();
+            
         }
         else
         {
@@ -179,16 +181,22 @@ public class GameOptions : MonoBehaviour
 
     public void SetBackground(int background)
     {
+        Debug.Log("We are here Background");
+
         PlayerPrefs.SetInt(BACKGROUND, background);
     }
 
     public void SetPrey(int prey)
     {
+        Debug.Log("We are here Prey");
+
         PlayerPrefs.SetInt(PREY, prey);
     }
 
     public void SetPredator(int predator)
     {
+        Debug.Log("We are here Predator");
+
         PlayerPrefs.SetInt(PREDATOR, predator);
     }
 }
