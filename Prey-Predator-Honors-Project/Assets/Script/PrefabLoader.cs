@@ -30,69 +30,111 @@ public class PrefabLoader : MonoBehaviour
     {
         if (scene.name == "CustomGame")
         {
-            // get prey object with all the prey child objects
-            GameObject preyParent = GameObject.Find("Prey");
+            
+            // replace prey prefabs
+            ReplacePrefabs("Prey", preyDropdown.value, preyPrefabs);
 
-            if (preyParent != null) // this should never be null, but just in case something bad happens so we dont crash
-            {
-                // get rid of preset prefabs
-                foreach (Transform child in preyParent.transform)
-                {
-                    GameObject.Destroy(child.gameObject);
-                }
+            // replace predator prefabs
+            ReplacePrefabs("Predator", predatorDropdown.value, predatorPrefabs);
 
-                // get number of prey prefabs to instantiate
-                int preyCount = preyPrefabs.Length; 
-
-                for (int i = 0; i < preyCount; i++)
-                {
-                    GameObject newPrey = Instantiate(preyPrefabs[preyDropdown.value], preyParent.transform);
-                    newPrey.transform.SetParent(preyParent.transform);  // Set the new prey as a child of the Prey parent object
-                }
-            }
-
-            // get predator object with all the predator child objects
-            GameObject predatorParent = GameObject.Find("Predator");
-
-            if (predatorParent != null) // this should never be null, but just in case something bad happens so we dont crash
-            {
-                // get rid of preset prefabs
-                foreach (Transform child in predatorParent.transform)
-                {
-                    GameObject.Destroy(child.gameObject);
-                }
-
-                // get number of predator prefabs to instantiate
-                int predatorCount = predatorPrefabs.Length;
-
-                for (int i = 0; i < predatorCount; i++)
-                {
-                    GameObject newPredator = Instantiate(predatorPrefabs[predatorDropdown.value], predatorParent.transform);
-                    newPredator.transform.SetParent(predatorParent.transform);  // Set the new prey as a child of the Prey parent object
-                }
-            }
+            
             
             // Unsubscribe from the event
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 
-    /*private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    // to help us replace the prefabs
+    // copys the original prefabs components so there isn't an issue with the components that the GameManager has references of
+    private void ReplacePrefabs(string parentName, int selectedIndex, GameObject[] prefabArray)
     {
-        if (scene.name == "CustomGame")
+        GameObject parentObject = GameObject.Find(parentName);
+
+        if (parentObject != null)
         {
-            // Instantiate new prefabs based on dropdown selections
-            currentBackground = Instantiate(backgroundPrefabs[backgroundDropdown.value]);
-            currentPrey = Instantiate(preyPrefabs[preyDropdown.value]);
-            currentPredator = Instantiate(predatorPrefabs[predatorDropdown.value]);
+            // Reference to the original prefab (before replacement)
+            GameObject originalPrefab = null;
 
-            Debug.Log($"Background Index: {currentBackground}");
-            Debug.Log($"Prey Index: {currentPrey}");
-            Debug.Log($"Predator Index: {currentPredator}");
+            if (parentObject.transform.childCount > 0)
+            {
+                originalPrefab = parentObject.transform.GetChild(0).gameObject;
+            }
 
+            // Clear existing children
+            foreach (Transform child in parentObject.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
 
-            // Unsubscribe from the event
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            // Instantiate the new prefab
+            GameObject selectedPrefab = prefabArray[selectedIndex];
+            GameObject newChild = Instantiate(selectedPrefab, parentObject.transform);
+
+            // Copy over necessary components and child objects
+            if (originalPrefab != null)
+            {
+                // Copy Avatar component
+                Avatar originalAvatar = originalPrefab.GetComponent<Avatar>();
+                Avatar newAvatar = newChild.GetComponent<Avatar>();
+                if (originalAvatar != null && newAvatar != null)
+                {
+                    CopyComponent(originalAvatar, newAvatar);
+                }
+
+                // Copy Prey Collider component
+                PreyCollider originalPreyCollider = originalPrefab.GetComponent<PreyCollider>();
+                PreyCollider newPreyCollider = newChild.GetComponent<PreyCollider>();
+                if (originalPreyCollider != null && newPreyCollider != null)
+                {
+                    CopyComponent(originalPreyCollider, newPreyCollider);
+                }
+
+                // Copy LegalMoveArea child object
+                Transform originalLegalMoveArea = originalPrefab.transform.Find("LegalMoveArea");
+                Transform newLegalMoveArea = newChild.transform.Find("LegalMoveArea");
+                if (originalLegalMoveArea != null && newLegalMoveArea != null)
+                {
+                    CopyTransform(originalLegalMoveArea, newLegalMoveArea);
+
+                    // Copy MoveArea script on LegalMoveArea
+                    MoveArea originalMoveArea = originalLegalMoveArea.GetComponent<MoveArea>();
+                    MoveArea newMoveArea = newLegalMoveArea.GetComponent<MoveArea>();
+                    if (originalMoveArea != null && newMoveArea != null)
+                    {
+                        CopyComponent(originalMoveArea, newMoveArea);
+                    }
+                }
+            }
         }
-    }*/
+    }
+
+
+    // to help us copy prefab components
+    private void CopyComponent<T>(T original, T destination) where T : Component
+    {
+        
+        var type = typeof(T);
+        var fields = type.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+        foreach (var field in fields)
+        {
+            field.SetValue(destination, field.GetValue(original));
+        }
+    }
+
+    // to help us copy transforms
+    private void CopyTransform(Transform original, Transform destination)
+    {
+        destination.position = original.position;
+        destination.rotation = original.rotation;
+        destination.localScale = original.localScale;
+    }
+
+
+
 }
+
+
+
+
+
