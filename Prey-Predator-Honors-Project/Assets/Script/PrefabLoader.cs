@@ -23,7 +23,7 @@ public class PrefabLoader : MonoBehaviour
         Debug.Log("We are here");
         SceneManager.LoadScene("CustomGame", LoadSceneMode.Single);
         SceneManager.sceneLoaded += OnSceneLoaded;
-        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+        //OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -52,7 +52,7 @@ public class PrefabLoader : MonoBehaviour
 
         if (parentObject != null)
         {
-            // Reference to the original prefab (before replacement)
+            // Find the original prefab (the first child)
             GameObject originalPrefab = null;
 
             if (parentObject.transform.childCount > 0)
@@ -60,53 +60,123 @@ public class PrefabLoader : MonoBehaviour
                 originalPrefab = parentObject.transform.GetChild(0).gameObject;
             }
 
-            // Clear existing children
+            // Detach the LegalMoveArea and Avatar to preserve them
+            Transform originalLegalMoveArea = null;
+            Avatar originalAvatarScript = null;
+
+            if (originalPrefab != null)
+            {
+                originalLegalMoveArea = originalPrefab.transform.Find("LegalMoveArea");
+                originalAvatarScript = originalPrefab.GetComponent<Avatar>();
+
+                if (originalLegalMoveArea != null)
+                {
+                    originalLegalMoveArea.SetParent(null); // Detach the LegalMoveArea
+                }
+            }
+
+            // Destroy the existing children
             foreach (Transform child in parentObject.transform)
             {
                 GameObject.Destroy(child.gameObject);
             }
 
             // Instantiate the new prefab
-            GameObject selectedPrefab = prefabArray[selectedIndex];
-            GameObject newChild = Instantiate(selectedPrefab, parentObject.transform);
+            GameObject newChild = Instantiate(prefabArray[selectedIndex], parentObject.transform);
 
-            // Copy over necessary components and child objects
+            // Swap the LegalMoveArea from the old prefab to the new one
+            if (originalLegalMoveArea != null)
+            {
+                Transform newLegalMoveArea = newChild.transform.Find("LegalMoveArea");
+                if (newLegalMoveArea != null)
+                {
+                    Destroy(newLegalMoveArea.gameObject); // Remove the new prefab's MoveArea
+                }
+
+                originalLegalMoveArea.SetParent(newChild.transform); // Reattach the old LegalMoveArea
+                originalLegalMoveArea.localPosition = Vector3.zero; // Ensure it is correctly positioned
+                originalLegalMoveArea.localRotation = Quaternion.identity;
+            }
+
+            // Reassign the Avatar script
+            if (originalAvatarScript != null)
+            {
+                Avatar newAvatarScript = newChild.GetComponent<Avatar>();
+                if (newAvatarScript != null)
+                {
+                    // Set the new Avatar's MoveArea reference to the old LegalMoveArea
+                    newAvatarScript.SetMovementArea(originalAvatarScript.MovementArea);
+                }
+            }
+
+            // Clean up
             if (originalPrefab != null)
             {
-                // Copy Avatar component
-                Avatar originalAvatar = originalPrefab.GetComponent<Avatar>();
-                Avatar newAvatar = newChild.GetComponent<Avatar>();
-                if (originalAvatar != null && newAvatar != null)
-                {
-                    CopyComponent(originalAvatar, newAvatar);
-                }
-
-                // Copy Prey Collider component
-                PreyCollider originalPreyCollider = originalPrefab.GetComponent<PreyCollider>();
-                PreyCollider newPreyCollider = newChild.GetComponent<PreyCollider>();
-                if (originalPreyCollider != null && newPreyCollider != null)
-                {
-                    CopyComponent(originalPreyCollider, newPreyCollider);
-                }
-
-                // Copy LegalMoveArea child object
-                Transform originalLegalMoveArea = originalPrefab.transform.Find("LegalMoveArea");
-                Transform newLegalMoveArea = newChild.transform.Find("LegalMoveArea");
-                if (originalLegalMoveArea != null && newLegalMoveArea != null)
-                {
-                    CopyTransform(originalLegalMoveArea, newLegalMoveArea);
-
-                    // Copy MoveArea script on LegalMoveArea
-                    MoveArea originalMoveArea = originalLegalMoveArea.GetComponent<MoveArea>();
-                    MoveArea newMoveArea = newLegalMoveArea.GetComponent<MoveArea>();
-                    if (originalMoveArea != null && newMoveArea != null)
-                    {
-                        CopyComponent(originalMoveArea, newMoveArea);
-                    }
-                }
+                Destroy(originalPrefab);
             }
         }
     }
+    /* private void ReplacePrefabs(string parentName, int selectedIndex, GameObject[] prefabArray)
+     {
+         GameObject parentObject = GameObject.Find(parentName);
+
+         if (parentObject != null)
+         {
+             // Reference to the original prefab (before replacement)
+             GameObject originalPrefab = null;
+
+             if (parentObject.transform.childCount > 0)
+             {
+                 originalPrefab = parentObject.transform.GetChild(0).gameObject;
+             }
+
+             // Clear existing children
+             foreach (Transform child in parentObject.transform)
+             {
+                 GameObject.Destroy(child.gameObject);
+             }
+
+             // Instantiate the new prefab
+             GameObject selectedPrefab = prefabArray[selectedIndex];
+             GameObject newChild = Instantiate(selectedPrefab, parentObject.transform);
+
+             // Copy over necessary components and child objects
+             if (originalPrefab != null)
+             {
+                 // Copy Avatar component
+                 Avatar originalAvatar = originalPrefab.GetComponent<Avatar>();
+                 Avatar newAvatar = newChild.GetComponent<Avatar>();
+                 if (originalAvatar != null && newAvatar != null)
+                 {
+                     CopyComponent(originalAvatar, newAvatar);
+                 }
+
+                 // Copy Prey Collider component
+                 PreyCollider originalPreyCollider = originalPrefab.GetComponent<PreyCollider>();
+                 PreyCollider newPreyCollider = newChild.GetComponent<PreyCollider>();
+                 if (originalPreyCollider != null && newPreyCollider != null)
+                 {
+                     CopyComponent(originalPreyCollider, newPreyCollider);
+                 }
+
+                 // Copy LegalMoveArea child object
+                 Transform originalLegalMoveArea = originalPrefab.transform.Find("LegalMoveArea");
+                 Transform newLegalMoveArea = newChild.transform.Find("LegalMoveArea");
+                 if (originalLegalMoveArea != null && newLegalMoveArea != null)
+                 {
+                     CopyTransform(originalLegalMoveArea, newLegalMoveArea);
+
+                     // Copy MoveArea script on LegalMoveArea
+                     MoveArea originalMoveArea = originalLegalMoveArea.GetComponent<MoveArea>();
+                     MoveArea newMoveArea = newLegalMoveArea.GetComponent<MoveArea>();
+                     if (originalMoveArea != null && newMoveArea != null)
+                     {
+                         CopyComponent(originalMoveArea, newMoveArea);
+                     }
+                 }
+             }
+         }
+     }*/
 
 
     // to help us copy prefab components
