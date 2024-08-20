@@ -25,30 +25,33 @@ public class SpriteLoader : MonoBehaviour
     {
         if (scene.name == "CustomGame")
         {
-            // Update the sprites for background, prey, and predator
-            ReplaceSprite("Background", backgroundDropdown.value, backgroundSprites);
-            ReplaceSprite("Prey", preyDropdown.value, preySprites);
-            ReplaceSprite("Predator", predatorDropdown.value, predatorSprites);
+            // Update the sprites for prey, and predator
+            ReplaceSprites("Prey", preyDropdown.value, preySprites);
+            ReplaceSprites("Predator", predatorDropdown.value, predatorSprites);
 
             // Unsubscribe from the event
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 
-    private void ReplaceSprite(string parentName, int selectedIndex, Sprite[] spriteArray)
+    private void ReplaceSprites(string parentName, int selectedIndex, Sprite[] spriteArray)
     {
         GameObject parentObject = GameObject.Find(parentName);
 
         if (parentObject != null)
         {
-            // Find the "Sprite" child of the object
-            Transform spriteTransform = parentObject.transform.Find("Sprite");
-            if (spriteTransform != null)
+            // Go through each child of the parent game object
+            foreach (Transform child in parentObject.transform)
             {
-                SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>();
-                if (spriteRenderer != null && selectedIndex >= 0 && selectedIndex < spriteArray.Length)
+                // Find the "Sprite" child of each "Prey" or "Predator" child object
+                Transform spriteTransform = child.Find("Sprite");
+                if (spriteTransform != null)
                 {
-                    spriteRenderer.sprite = spriteArray[selectedIndex];
+                    SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>();
+                    if (spriteRenderer != null && selectedIndex >= 0 && selectedIndex < spriteArray.Length)
+                    {
+                        spriteRenderer.sprite = spriteArray[selectedIndex];
+                    }
                 }
             }
         }

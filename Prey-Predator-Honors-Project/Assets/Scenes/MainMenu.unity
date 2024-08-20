@@ -2947,7 +2947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb149e91500ca754aba6fba7443f99f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabLoader: {fileID: 1808575486}
+  prefabLoader: {fileID: 0}
 --- !u!1 &287401061
 GameObject:
   m_ObjectHideFlags: 0
@@ -11892,7 +11892,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1808575485}
-  - component: {fileID: 1808575486}
   m_Layer: 5
   m_Name: CustomObjects
   m_TagString: Untagged
@@ -11922,30 +11921,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1808575486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808575484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa86462b7b66cd547a256579d7e16859, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  backgroundDropdown: {fileID: 225337751}
-  preyDropdown: {fileID: 1016843222}
-  predatorDropdown: {fileID: 1025884757}
-  backgroundPrefabs:
-  - {fileID: 687494536319163747, guid: fb617ccc15fc302449bdd0285c18fab0, type: 3}
-  - {fileID: 7758685827957355965, guid: 7136cf81b65328840b3590ea500e2452, type: 3}
-  preyPrefabs:
-  - {fileID: 4931280537571260440, guid: c6a1644d6b406414db74567218c33e87, type: 3}
-  - {fileID: 8520900860946463965, guid: 2baf236cb274509418e6b92f5dede8e0, type: 3}
-  predatorPrefabs:
-  - {fileID: 1922536188022943667, guid: cb6cc347c1174ac46a9785828dadc5ba, type: 3}
-  - {fileID: 5701738197254284507, guid: 77fb8a5b80b5183478868e576c79be26, type: 3}
 --- !u!1 &1809394738
 GameObject:
   m_ObjectHideFlags: 0

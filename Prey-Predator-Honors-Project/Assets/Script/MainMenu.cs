@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
         if (GameOptions.GetVersionName() == "CustomGame")
         {
 
-            spriteLoader.loadSprites();
+            spriteLoader.LoadSprites();
         }
         else
         {
