@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
 {
 
     // to get prefabs for custom game
-    public PrefabLoader prefabLoader;
+    public SpriteLoader spriteLoader;
 
     public void PlayGame()
     {
@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
         if (GameOptions.GetVersionName() == "CustomGame")
         {
 
-            prefabLoader.LoadPrefabs();
+            spriteLoader.loadSprites();
         }
         else
         {

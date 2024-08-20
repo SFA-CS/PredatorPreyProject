@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 2020855250950221590}
   - component: {fileID: 4113727543889161094}
   m_Layer: 6
-  m_Name: Predator Sprite
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

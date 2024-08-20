@@ -278,7 +278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_Name
-      value: SpaceTorpedo (1)
+      value: predator (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_IsActive
@@ -383,7 +383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_Name
-      value: SpaceShip (1)
+      value: prey (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_IsActive
@@ -681,7 +681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_Name
-      value: SpaceTorpedo (7)
+      value: predator (7)
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_IsActive
@@ -754,7 +754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_Name
-      value: SpaceTorpedo (2)
+      value: predator (2)
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_IsActive
@@ -937,7 +937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_Name
-      value: SpaceShip (5)
+      value: prey (5)
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_IsActive
@@ -1380,7 +1380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_Name
-      value: SpaceShip (4)
+      value: prey (4)
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_IsActive
@@ -1502,7 +1502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_Name
-      value: SpaceTorpedo (6)
+      value: predator (6)
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_IsActive
@@ -1591,7 +1591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_Name
-      value: SpaceTorpedo (5)
+      value: predator (5)
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_IsActive
@@ -1655,7 +1655,7 @@ GameObject:
   - component: {fileID: 703577881}
   - component: {fileID: 703577880}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: BackgroundCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1814,7 +1814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_Name
-      value: SpaceTorpedo (9)
+      value: predator (9)
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_IsActive
@@ -1903,7 +1903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_Name
-      value: SpaceTorpedo (4)
+      value: predator (4)
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_IsActive
@@ -2136,7 +2136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_Name
-      value: SpaceTorpedo (3)
+      value: predator (3)
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_IsActive
@@ -2391,7 +2391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_Name
-      value: SpaceShip (3)
+      value: prey (3)
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_IsActive
@@ -2847,7 +2847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_Name
-      value: SpaceShip (9)
+      value: prey (9)
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_IsActive
@@ -3354,7 +3354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_Name
-      value: SpaceShip (6)
+      value: prey (6)
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_IsActive
@@ -3443,7 +3443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_Name
-      value: SpaceShip (7)
+      value: prey (7)
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_IsActive
@@ -3877,7 +3877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_Name
-      value: SpaceShip (8)
+      value: prey (8)
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_IsActive
@@ -4668,7 +4668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_Name
-      value: SpaceShip (2)
+      value: prey (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_IsActive
@@ -4725,7 +4725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_Name
-      value: SpaceTorpedo (8)
+      value: predator (8)
       objectReference: {fileID: 0}
     - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_IsActive
@@ -4828,6 +4828,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prey
       objectReference: {fileID: 0}
+    - target: {fileID: 1196035169324279446, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
+      propertyPath: m_Name
+      value: prey
+      objectReference: {fileID: 0}
     - target: {fileID: 3383923419001423658, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
@@ -4837,7 +4841,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 689453034790901020, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6208ff49416afcf4ea076232aef033b3, type: 3}
@@ -4860,6 +4865,10 @@ PrefabInstance:
     - target: {fileID: 4379124516954701577, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_Name
       value: Predator
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130964745315981576, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
+      propertyPath: m_Name
+      value: predator
       objectReference: {fileID: 0}
     - target: {fileID: 8560912103757317810, guid: 2ae9614beb9766642a3722d639c72392, type: 3}
       propertyPath: m_LocalPosition.x
