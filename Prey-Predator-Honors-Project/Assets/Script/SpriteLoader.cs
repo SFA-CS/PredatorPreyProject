@@ -24,9 +24,12 @@ public class SpriteLoader : MonoBehaviour
     {
         if (scene.name == "CustomGame")
         {
-            // Update the sprites for prey, and predator
+            // Update the sprites for prey and predator
             ReplaceSprites("Prey", preyDropdown.value, preySprites);
             ReplaceSprites("Predator", predatorDropdown.value, predatorSprites);
+
+            // Update the background sprite
+            ReplaceBackgroundSprite();
 
             // Unsubscribe from the event
             SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -72,6 +75,29 @@ public class SpriteLoader : MonoBehaviour
                             continue;
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private void ReplaceBackgroundSprite()
+    {
+        // Find the BackgroundCanvas GameObject first
+        GameObject backgroundCanvasObject = GameObject.Find("BackgroundCanvas");
+
+        if (backgroundCanvasObject != null)
+        {
+            // Find the Background GameObject under the BackgroundCanvas
+            GameObject backgroundObject = backgroundCanvasObject.transform.Find("Background").gameObject;
+
+            if (backgroundObject != null)
+            {
+                // Get the SpriteRenderer component
+                SpriteRenderer spriteRenderer = backgroundObject.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    // Replace the sprite with the selected one
+                    spriteRenderer.sprite = backgroundSprites[backgroundDropdown.value];
                 }
             }
         }
