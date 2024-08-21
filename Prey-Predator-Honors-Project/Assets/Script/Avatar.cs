@@ -25,6 +25,15 @@ public class Avatar : MonoBehaviour
     private MoveArea moveArea;
     public MoveArea MovementArea { get { return moveArea; }  }
 
+    // setter for moveArea: needed for custom games so we can perform a swap of avatars
+    public void SetMovementArea(MoveArea newMoveArea)
+    {
+        if (newMoveArea != null)
+        {
+            moveArea = newMoveArea;
+        }
+    }
+
     private Vector2 destination;
     public Vector2 Destination {  get { return destination; } set { destination = value; } }
 
