@@ -44,15 +44,28 @@ public class SpriteLoader : MonoBehaviour
             {
                 // Find the "Sprite" child of each "Prey" or "Predator" child object
                 Transform spriteTransform = child.Find("Sprite");
+                
                 if (spriteTransform != null)
                 {
                     SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>();
                     if (spriteRenderer != null && selectedIndex >= 0 && selectedIndex < spriteArray.Length)
                     {
                         spriteRenderer.sprite = spriteArray[selectedIndex];
+                        
+                        // Spaceship sprites are different from animal ones and need some rotation and moving of the LegalMoveArea
+                        if (spriteRenderer.sprite.name == "2DSpaceshipsFreeTrialAtlasTopViewGreen_2")
+                        {
+                            // Find the "LegalMoveArea" child 
+                            Transform legalMoveAreaTransform = child.Find("LegalMoveArea");
+                            spriteTransform.localRotation = Quaternion.Euler(0, 0, -90);
+                            legalMoveAreaTransform.localPosition = new Vector3(0, 1, 0);
+                        }
                     }
                 }
             }
         }
     }
+
 }
+
+

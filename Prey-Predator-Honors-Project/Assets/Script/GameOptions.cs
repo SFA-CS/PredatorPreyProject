@@ -28,7 +28,7 @@ public class GameOptions : MonoBehaviour
     public enum Background { Backyard = 0, Space = 1 }; // dropdown options for background sprites
 
     public const string PREY = "PREY";
-    public enum Prey { Fox = 0, Deer = 1, Pig = 2, Moose = 3, Panda = 4, Rabit = 5, Raccoon = 6}; // dropdown options for prey sprites
+    public enum Prey { Fox = 0, Deer = 1, Pig = 2, Moose = 3, Panda = 4, Rabit = 5, Raccoon = 6, Spaceship = 7}; // dropdown options for prey sprites
 
     public const string PREDATOR = "PREDATOR";
     public enum Predator { Bear = 0, Tiger = 1, Wolf = 2, Cougar = 3 }; // dropdown options for predator sprites

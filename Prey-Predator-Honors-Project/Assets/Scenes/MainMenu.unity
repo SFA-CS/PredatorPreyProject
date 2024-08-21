@@ -7510,6 +7510,8 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Raccoon
       m_Image: {fileID: 0}
+    - m_Text: Spaceship
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -11960,6 +11962,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4cb17df5ff5b2b949ac71f3fd9fa4fa3, type: 3}
   - {fileID: 21300000, guid: 0eb3c9c02f83597448fb46cf4d241b7b, type: 3}
   - {fileID: 21300000, guid: 7cdf9ea38311d6b4c9a0aa700f6a33ec, type: 3}
+  - {fileID: 21300004, guid: 3e47ec619440c7441a65da8dfbb269f3, type: 3}
   predatorSprites:
   - {fileID: 21300000, guid: 8f92e662959595e43b6131fe41352edc, type: 3}
   - {fileID: 21300000, guid: 243e160bbf8a2c146a82345aadae2795, type: 3}
