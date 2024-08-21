@@ -16,7 +16,6 @@ public class SpriteLoader : MonoBehaviour
 
     public void LoadSprites()
     {
-        Debug.Log("We are here");
         SceneManager.LoadScene("CustomGame", LoadSceneMode.Single);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
