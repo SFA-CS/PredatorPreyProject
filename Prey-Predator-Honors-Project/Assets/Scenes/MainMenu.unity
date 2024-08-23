@@ -1934,9 +1934,9 @@ MonoBehaviour:
   m_Value: 1
   m_Options:
     m_Options:
-    - m_Text: Backyard
-      m_Image: {fileID: 0}
     - m_Text: Space
+      m_Image: {fileID: 0}
+    - m_Text: Backyard
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7496,6 +7496,8 @@ MonoBehaviour:
   m_Value: 1
   m_Options:
     m_Options:
+    - m_Text: Spaceship
+      m_Image: {fileID: 0}
     - m_Text: Fox
       m_Image: {fileID: 0}
     - m_Text: Deer
@@ -7509,8 +7511,6 @@ MonoBehaviour:
     - m_Text: Rabit
       m_Image: {fileID: 0}
     - m_Text: Raccoon
-      m_Image: {fileID: 0}
-    - m_Text: Spaceship
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7691,6 +7691,8 @@ MonoBehaviour:
   m_Value: 1
   m_Options:
     m_Options:
+    - m_Text: Enemy Ship
+      m_Image: {fileID: 0}
     - m_Text: Bear
       m_Image: {fileID: 0}
     - m_Text: Tiger
@@ -7698,8 +7700,6 @@ MonoBehaviour:
     - m_Text: Wolf
       m_Image: {fileID: 0}
     - m_Text: Cougar
-      m_Image: {fileID: 0}
-    - m_Text: Missile
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11955,9 +11955,10 @@ MonoBehaviour:
   preyDropdown: {fileID: 1016843222}
   predatorDropdown: {fileID: 1025884757}
   backgroundSprites:
-  - {fileID: 21300000, guid: c347206643c0d514294fd0eb5d4d3496, type: 3}
   - {fileID: 21300000, guid: 921c40fbf1338f9419f3823a92e4a267, type: 3}
+  - {fileID: 21300000, guid: c347206643c0d514294fd0eb5d4d3496, type: 3}
   preySprites:
+  - {fileID: 21300004, guid: 3e47ec619440c7441a65da8dfbb269f3, type: 3}
   - {fileID: 21300000, guid: daf61b8218272ca448061a2f7dc43e43, type: 3}
   - {fileID: 21300000, guid: c48eaabf9e160bd409a2f0490b97a42c, type: 3}
   - {fileID: 21300000, guid: 137970750a482944e8b72a2222a86e54, type: 3}
@@ -11965,13 +11966,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4cb17df5ff5b2b949ac71f3fd9fa4fa3, type: 3}
   - {fileID: 21300000, guid: 0eb3c9c02f83597448fb46cf4d241b7b, type: 3}
   - {fileID: 21300000, guid: 7cdf9ea38311d6b4c9a0aa700f6a33ec, type: 3}
-  - {fileID: 21300004, guid: 3e47ec619440c7441a65da8dfbb269f3, type: 3}
   predatorSprites:
+  - {fileID: 21300000, guid: da841e0ed6399bd4695ebcfa661935f8, type: 3}
   - {fileID: 21300000, guid: 8f92e662959595e43b6131fe41352edc, type: 3}
   - {fileID: 21300000, guid: 243e160bbf8a2c146a82345aadae2795, type: 3}
   - {fileID: 21300000, guid: 7c3263a1d9a4e4441a733c756cfcb876, type: 3}
   - {fileID: 21300000, guid: 2d638cf75a7c66448ba442c4242ee799, type: 3}
-  - {fileID: 21300000, guid: da841e0ed6399bd4695ebcfa661935f8, type: 3}
 --- !u!1 &1809394738
 GameObject:
   m_ObjectHideFlags: 0
