@@ -63,6 +63,7 @@ public class SpriteLoader : MonoBehaviour
                             Transform legalMoveAreaTransform = child.Find("LegalMoveArea");
                             spriteTransform.localRotation = Quaternion.Euler(0, 0, -90);
                             legalMoveAreaTransform.localPosition = new Vector3(0, 1, 0);
+                            
                         }
                         // Torpedo sprites are a little different and need their scale changed
                         else if (spriteRenderer.sprite.name == "2DShipsMissilesTorpedoesAtlas_0")
@@ -98,6 +99,7 @@ public class SpriteLoader : MonoBehaviour
                 {
                     // Replace the sprite with the selected one
                     spriteRenderer.sprite = backgroundSprites[backgroundDropdown.value];
+                    spriteRenderer.gameObject.transform.localScale = new Vector3(1000, 1000, 1000);
                 }
             }
         }
