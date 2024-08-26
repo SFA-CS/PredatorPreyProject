@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class SliderTxtChange : MonoBehaviour
 {
     public string text;
@@ -18,6 +19,7 @@ public class SliderTxtChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        sliderText.text = text + slider.value.ToString();
+        float roundedVal = Mathf.RoundToInt(slider.value * 10) / 10.0f;
+        sliderText.text = text + roundedVal;
     }
 }
