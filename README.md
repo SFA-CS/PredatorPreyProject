@@ -5,3 +5,5 @@ Missile Pursuit and Interception Simulation in Unity WebGL to model missile guid
 Try out the simulation here [Missle Pursuit Simulation](https://sfa-cs.github.io/PredatorPreyProject/Prey-Predator-Honors-Project/Output/index.html).
 
 ![Screenshot](screenshot.png)
+
+![PosterInfo](poster.png)

@@ -24,7 +24,6 @@
 - Camera moves to object with a turn
 - Keyboard for camera controls
 
-**Updated: 3/20/2024**
 
 ---
 
@@ -64,15 +63,7 @@ solve for u and v {
 }
 ```
 
-(From WolframAlpha)
-
-Note:
-- `u` ≡ `a`, `v` ≡ `t`
-- `n = 0` used for cosine term
-
-Once `(a, t)` is known:
-- Object follows path as per Legal Move Area
-- Object is rotated to face along the unit tangent direction
+ion
 
 ---
 
@@ -142,4 +133,4 @@ Once `(a, t)` is known:
 ## Notes
 - `LegalMoveArea` on UI Layer  
 - Predator/Prey on Default Layer  
-- They do not cause collisions due to layer settings
+- They do not cause collisions due to layer settings.
